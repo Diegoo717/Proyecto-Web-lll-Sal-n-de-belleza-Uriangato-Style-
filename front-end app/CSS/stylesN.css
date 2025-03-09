@@ -197,7 +197,6 @@ body {
     color: white;
     font-weight: bold;
     -webkit-text-stroke: 1px #B45636;
-    padding: 10px;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 

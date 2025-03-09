@@ -1,0 +1,518 @@
+
+/*Galeria new*/
+body {
+    
+    background-color: #FBF4EB;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+#galeria {
+    background-color: #D0ECEC;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Titan One', sans-serif !important;
+    border-bottom:  3px solid #449ba4;
+}
+
+#galeria h4 {
+    color: #fff;
+    font-size: 2rem;
+    font-family: 'Titan One', sans-serif;
+    margin: 0;
+    -webkit-text-stroke: 1px black;
+    margin-bottom: 30px;
+}
+
+#encabezado-galeria{
+    margin: 0;
+    background-color: #D0ECEC;
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 25px;
+    -webkit-text-stroke: 1px black;
+    border-bottom:  3px solid #F78DA7;
+    flex-direction: column;
+    padding-bottom: 10px;
+}
+
+#nav-galeria{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    font-size: 20px;
+    margin-top: 15px;
+    padding-bottom: 5px;
+}
+
+#nav-galeria a{
+    text-decoration: none;
+    color: #F78DA7;
+    -webkit-text-stroke: 1px #134848;
+}
+
+#nav-galeria a::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #134848; 
+    left: 0;
+    bottom: -3px;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+#nav-galeria a:hover {
+    color: #FFB6C1;
+    -webkit-text-stroke: 1px #134848;
+    transform: scale(1.08); 
+}
+
+#nav-galeria a:hover::after {
+    transform: scaleX(1); 
+}
+
+@media (max-width: 768px){
+    #nav-galeria{
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #nav-galeria a{
+        text-decoration: none;
+        color: #F78DA7;
+        -webkit-text-stroke: 1px #134848;
+        margin-top: 5px;
+    }
+    
+    #nav-galeria a::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background-color: #134848; 
+        left: 0;
+        bottom: -3px;
+        transform: scaleX(0);
+        transition: transform 0.3s ease-in-out;
+    }
+    
+    #nav-galeria a:hover {
+        color: #FFB6C1;
+        -webkit-text-stroke: 1px #134848;
+        transform: scale(1.08); 
+    }
+    
+    #nav-galeria a:hover::after {
+        transform: scaleX(1); 
+    }
+}
+
+
+.servicios {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 20px; /* Espacio entre los cuadritos */
+    padding: 20px;
+}
+
+.servicios h2 {
+    grid-column: span 4; /* El título ocupa las 4 columnas */
+    color: #D0ECEC;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.servicio {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    height: 370px; /* Ajusta este valor según sea necesario */
+}
+
+.servicio img {
+    width: 300px; /* Cambia este valor para ajustar la anchura */
+    height: 320px; /* Cambia este valor para ajustar la altura */
+    margin-bottom: 15px;
+    object-fit: cover; /* Asegura que la imagen cubra el espacio sin distorsionarse */
+}
+
+.servicio h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #4f9696;
+}
+
+.servicio p {
+    margin: 10px 0;
+    font-size: 0.9rem;
+    color: black;
+}
+
+.servicio .precio {
+    font-size: 1rem;
+    color: black;
+    font-weight: bold;
+}
+/*-------------niñoooooooooos--------------*/
+
+#encabezado-servicios-niños {
+    margin: 0;
+    background-color: #EE845D; /* Color del primer CSS */
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 25px;
+    -webkit-text-stroke: 1px black;
+    border-bottom: 3px solid #C76B48;
+    padding-bottom: 10px;
+    font-family: 'Titan One', sans-serif !important;
+}
+
+#nav-servicios-niños {
+    font-family: 'Titan One', sans-serif !important;
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    font-size: 20px;
+}
+
+#nav-servicios-niños a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    -webkit-text-stroke: 1px #B45636;
+    padding: 10px;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+#nav-servicios-niños a::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #B45636; 
+    left: 0;
+    bottom: -3px;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+#nav-servicios-niños a:hover {
+    color: #FBEADB; /* Color más claro al pasar el mouse */
+    -webkit-text-stroke: 1px #A0492F; 
+    transform: scale(1.08);
+}
+
+#nav-servicios-niños a:hover::after {
+    transform: scaleX(1); 
+}
+
+@media (max-width: 768px) {
+    #nav-servicios-niños {
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #nav-servicios-niños a {
+        text-decoration: none;
+        color: white;
+        -webkit-text-stroke: 1px #A0492F;
+        margin-top: 5px;
+    }
+    
+    #nav-servicios-niños a::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background-color: #A0492F;
+        left: 0;
+        bottom: -3px;
+        transform: scaleX(0);
+        transition: transform 0.3s ease-in-out;
+    }
+    
+    #nav-servicios-niños a:hover {
+        color: #FBEADB;
+        -webkit-text-stroke: 1px #A0492F;
+        transform: scale(1.08); 
+    }
+    
+    #nav-servicios-niños a:hover::after {
+        transform: scaleX(1); 
+    }
+}
+
+.contenedor {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 40px;
+    background-color: #FBF4EB; /* Fondo beige claro */
+    text-align: center;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas por fila */
+}
+
+/* Estilo de cada servicio */
+.servicioN {
+    background-color: #EE845D; /* Fondo beige */
+    border: 3px solid #F29962; /* Borde naranja */
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.servicioN:hover {
+    transform: scale(1.05);
+}
+
+/* Imágenes de los servicios */
+.servicioN img {
+    width: 200px; /* Tamaño pequeño para íconos */
+    height: 300px;
+    object-fit: contain;
+    margin-bottom: 10px;
+}
+
+/* Títulos y texto */
+.servicioN h3 {
+    font-size: 1.2rem;
+    color: #F5F5F5; /* Tono más oscuro de naranja */
+    margin-bottom: 5px;
+}
+
+.servicioN p {
+    font-size: 1rem;
+    color: #333;
+    margin: 5px 0;
+    font-weight: bold;
+}
+
+/* ------------------blog-----------*/
+#encabezado-blog{
+    margin: 0;
+    background-color: #D2AC86;
+    min-height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 25px;
+    -webkit-text-stroke: 1px black;
+    border-bottom:  3px solid #ab7947;
+    padding-bottom: 10px;
+    font-family: 'Titan One', sans-serif !important;
+}
+
+#nav-blog{
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    font-size: 20px;
+}
+
+#nav-blog a{
+    text-decoration: none;
+    color: #ab7947;
+    -webkit-text-stroke: 1px #503010;
+    font-family: 'Titan One', sans-serif !important;
+}
+
+#nav-blog a::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    background-color: #503010;
+    left: 0;
+    bottom: -3px;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+}
+
+#nav-blog a:hover {
+    color: #d49b67;
+    -webkit-text-stroke: 1px #7a4f2e; 
+    transform: scale(1.08); 
+}
+
+#nav-blog a:hover::after {
+    transform: scaleX(1); 
+}
+
+@media (max-width: 768px){
+    #nav-blog{
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    #nav-blog a{
+        text-decoration: none;
+        color: #ab7947;
+        -webkit-text-stroke: 1px #7a4f2e;
+        margin-top: 5px;
+    }
+    
+    #nav-blog a::after {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background-color: #7a4f2e; 
+        left: 0;
+        bottom: -3px;
+        transform: scaleX(0);
+        transition: transform 0.3s ease-in-out;
+    }
+    
+    #nav-blog a:hover {
+        color: #d49b67;
+        -webkit-text-stroke: 1px #7a4f2e;
+        transform: scale(1.08); 
+    }
+    
+    #nav-blog a:hover::after {
+        transform: scaleX(1); 
+    }
+}
+
+.blog {
+    background-color: #D2AC86;
+    padding: 20px;
+    text-align: center;
+}
+
+.blog nav ul li {
+    display: inline;
+}
+
+.blog nav ul li a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    padding: 10px;
+    transition: color 0.3s ease;
+}
+
+.blog nav ul li a:hover {
+    color: #FBEADB; /* Color más claro al pasar el mouse */
+}
+
+
+article {
+    background-color: #ddd;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+article h2 {
+    color: #D07C4C;
+}
+
+article p {
+    margin: 5px 0;
+}
+
+article a {
+    color: #0066cc;
+    text-decoration: none;
+}
+
+article a:hover {
+    text-decoration: underline;
+}
+
+/* Estilos exclusivos para la página de consejos */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #FAF3E0; /* Beige claro */
+    margin: 0;
+    padding: 0;
+    color: #4A3F35; /* Marrón oscuro */
+}
+
+/* Encabezado */
+.articuloTips {
+    background-color: #D98841; /* Naranja tierra */
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+.articuloTips h1 {
+    margin: 0;
+    font-size: 2rem;
+}
+
+/* Contenedor de consejos */
+.puntos {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+    gap: 20px;
+    padding: 40px;
+    max-width: 900px;
+    margin: auto;
+}
+
+/* Diseño de cada consejo */
+.consejo {
+    background-color: #FFF8ED; /* Fondo suave */
+    border-left: 5px solid #D98841; /* Borde lateral naranja */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Titulos de consejos */
+.consejo h2 {
+    font-size: 1.2rem;
+    color: #B65B2C; /* Marrón rojizo */
+    margin-bottom: 10px;
+}
+
+/* Texto de consejos */
+.consejo p {
+    font-size: 1rem;
+    color: #4A3F35;
+    margin: 0;
+}
+
+/* Pie de página */
+footer {
+    background-color: #D98841;
+    color: white;
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+}
+
+/* Responsivo: en móviles, cambia a una sola columna */
+@media (max-width: 768px) {
+    .puntos {
+        grid-template-columns: 1fr; /* Solo una columna */
+    }
+}
+

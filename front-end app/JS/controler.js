@@ -13,16 +13,16 @@ article2.addEventListener("click", (r) =>{
     location.replace('http://127.0.0.1:5500/front-end%20app/HTML/serviciosHombre.html')
 })
 article3.addEventListener("click", (r) =>{
-    location.replace('')
+    location.replace('http://127.0.0.1:5500/front-end%20app/HTML/Niños.html')
 })
 article4.addEventListener("click", (r) =>{
     location.replace('http://127.0.0.1:5500/front-end%20app/HTML/contacto.html')
 })
 article5.addEventListener("click", (r) =>{
-    location.replace('')
+    location.replace('http://localhost:5500/front-end%20app/HTML/galeria.html')
 })
 article6.addEventListener("click", (r) =>{
-    location.replace('')
+    location.replace('http://127.0.0.1:5500/front-end%20app/HTML/Blog.html')
 })
 article7.addEventListener("click", (r) =>{
     location.replace('http://127.0.0.1:5500/front-end%20app/HTML/agendarCita.html')

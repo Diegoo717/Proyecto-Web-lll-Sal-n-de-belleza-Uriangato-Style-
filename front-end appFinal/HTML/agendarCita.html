@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/styles.css">
+    <title>Agendar Cita</title>
+</head>
+<body>
+    
+    <header id="encabezado-agendarCita">
+        <h4>AGENDA TU CITA</h4>
+        <nav id="nav-agendarCita">
+
+            <a href="index.html">Inicio</a>
+            <a href="serviciosHombre.html">Hombre</a>
+            <a href="serviciosMujer.html">Mujer</a>
+            <a href="Niños.html">Niñ@s</a>
+            <a href="Blog.html">Blog</a>
+            <a href="Galeria.html">Galería</a>
+            <a href="contacto.html">Contacto</a>
+
+        </nav>
+    </header>
+
+    <main id="contenedorPrincipal-agendarCita">
+
+        <form id="form-agendarCita">
+            <label id="label1">Datos del cliente</label>
+    
+            <label class="labels" for="username">Nombre Completo:</label>
+            <input id="username" type="text" placeholder="Ej: Juan Pérez">
+    
+            <label class="labels" for="email">Correo electrónico:</label>
+            <input id="email" type="email" placeholder="Ej: correo@ejemplo.com">
+    
+            <label class="labels" for="datetime">Fecha y hora de la cita:</label>
+            <input id="datetime" type="datetime-local">
+    
+            <label class="labels" for="category">Selecciona tu categoría:</label>
+            <select id="category" onchange="updateServices()">
+                <option value="" disabled selected>Selecciona una opción</option>
+                <option value="hombre">Hombre</option>
+                <option value="mujer">Mujer</option>
+                <option value="niños">Niños</option>
+            </select>
+
+            <label class="labels" for="service">Selecciona un servicio:</label>
+            <select id="service">
+            <option value="" disabled selected>Selecciona una categoría primero</option>
+            </select>
+
+            <p>⬇️Consulta nuestros servicios aqui⬇️</p>
+            <div>
+                <a href="serviciosHombre.html">Hombre</a>
+                <a href="serviciosMujer.html">Mujer</a>
+                <a href="Niños.html">Niñ@s</a>
+            </div>
+    
+            <button type="submit">Agendar Cita</button>
+        </form>
+
+    </main>
+
+    <script>
+        function updateServices() {
+            const category = document.getElementById("category").value;
+            const serviceSelect = document.getElementById("service");
+
+            serviceSelect.innerHTML = "";
+
+            let services = [];
+            if (category === "hombre") {
+                services = ["Corte de cabello", "Rasurado tradicional", "Mascarilla negra carbón activado"];
+            } else if (category === "mujer") {
+                services = [
+            "Corte de cabello en capas",
+            "Corte recto",
+            "Corte degrafilado",
+            "Corte bob",
+            "Depilación con hilo (cejas, rostro)",
+            "Depilación con cera (axilas, piernas, brazos, rostro, bikini)",
+            "Diseño de ceja",
+            "Depilación con cera (ceja y bozo)",
+            "Pestañas clásicas",
+            "Pestañas efecto rímel",
+            "Retiro de extensiones",
+            "Lifting de pestañas",
+            "Tinte completo",
+            "Balayage",
+            "Mechas 3D",
+            "Babylights",
+            "Peinado con ondas sueltas",
+            "Recogidos para eventos",
+            "Planchado exprés",
+            "Peinado de novia y quinceañera",
+            "Maquillaje social (de día o de noche)",
+            "Maquillaje para eventos (bodas y XV años)",
+            "Maquillaje con aerógrafo",
+            "Maquillaje artístico o fantasía",
+            "Uñas esculturales",
+            "Nail art (diseños personalizados, pedrería, efecto cromo)",
+            "Uñas encapsuladas",
+            "Gelish",
+            "Manicure tradicional",
+            "Manicure spa",
+            "Pedicure básico",
+            "Pedicure spa (hidratación profunda)"
+            ];
+
+            } else if (category === "niños") {
+                services = ["Corte de cabello infantil", "Peinados y trenzas tematicas", "Manicura y pedicura infantil", 
+                "Maquillaje Infantil", "Tatuajes temporales y glitter", "Spa infantil"];
+            }
+
+            if (services.length > 0) {
+                services.forEach(service => {
+                    let option = document.createElement("option");
+                    option.value = service.toLowerCase().replace(/\s+/g, "-"); 
+                    option.textContent = service;
+                    serviceSelect.appendChild(option);
+                });
+            } else {
+                let option = document.createElement("option");
+                option.value = "";
+                option.textContent = "Selecciona una categoría primero";
+                serviceSelect.appendChild(option);
+            }
+        }
+    </script>
+
+</body>
+</html>

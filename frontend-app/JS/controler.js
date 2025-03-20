@@ -10,20 +10,20 @@ article1.addEventListener("click", () => {
     window.location.href = "serviciosMujer.html";
 });
 article2.addEventListener("click", () => {
-    window.location.href = "serviciosHombre.html";
+    window.location.href = "/HTML/serviciosHombre.html";
 });
 article3.addEventListener("click", () => {
-    window.location.href = "Niños.html";
+    window.location.href = "/HTML/Niños.html";
 });
 article4.addEventListener("click", () => {
-    window.location.href = "contacto.html";
+    window.location.href = "/HTML/contacto.html";
 });
 article5.addEventListener("click", () => {
-    window.location.href = "galeria.html";
+    window.location.href = "/HTML/galeria.html";
 });
 article6.addEventListener("click", () => {
-    window.location.href = "Blog.html";
+    window.location.href = "/HTML/Blog.html";
 });
 article7.addEventListener("click", () => {
-    window.location.href = "agendarCita.html";
+    window.location.href = "/HTML/agendarCita.html";
 });

@@ -167,6 +167,16 @@ body{
     color: #EE845D;
 }
 
+@keyframes randomPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(var(--scale-amount)); }
+    100% { transform: scale(1); }
+}
+
+.random-pulse {
+    animation: randomPulse 1s ease-in-out;
+}
+
 /* Servicios Hombre */
 
 #encabezado-servicios-hombre{
@@ -564,6 +574,397 @@ button {
 
 button:hover {
     background-color: #1a5a5a;
+}
+
+/*gestionar citas*/
+
+/* Encabezado */
+#encabezado-gestionCitas {
+    margin: 0;
+    background-color: #D3ECD0;
+    min-height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 25px;
+    -webkit-text-stroke: 1px black;
+    border-bottom: 3px solid #6f9f69;
+}
+
+.titulo-principal {
+    margin: 0;
+}
+
+/* Contenedor principal */
+#contenedorPrincipal-gestionCitas {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+    position: relative;
+}
+
+/* Sección de tabla de citas */
+.tabla-citas {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 65%;
+    min-height: 75vh;
+    border: 2px solid #6f9f69;
+}
+
+.panel-superior {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.titulo-panel {
+    color: #6f9f69;
+    font-size: 24px;
+    margin: 0;
+}
+
+.buscador-contenedor {
+    display: flex;
+    align-items: center;
+}
+
+.input-buscar {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px 0 0 5px;
+    width: 250px;
+}
+
+.btn-buscar {
+    padding: 10px 15px;
+    background-color: #6f9f69;
+    color: white;
+    border: none;
+    border-radius: 0 5px 5px 0;
+    cursor: pointer;
+}
+
+.mensaje-alerta {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    display: none;
+}
+
+.mensaje-alerta.exito {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    display: block;
+}
+
+.mensaje-alerta.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    display: block;
+}
+
+.contenedor-tabla {
+    overflow-x: auto;
+    margin-bottom: 20px;
+}
+
+.tabla-datos {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabla-encabezado .fila-encabezado th,
+.tabla-cuerpo tr td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.tabla-encabezado .fila-encabezado th {
+    background-color: #D3ECD0;
+    color: #333;
+    font-weight: bold;
+}
+
+.tabla-cuerpo tr:hover {
+    background-color: #f9f9f9;
+}
+
+.columna-acciones {
+    min-width: 90px;
+}
+
+.accion-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+    font-size: 16px;
+}
+
+.editar-btn {
+    color: #4CAF50;
+}
+
+.eliminar-btn {
+    color: #F44336;
+}
+
+.paginacion-contenedor {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.btn-paginacion {
+    padding: 8px 15px;
+    background-color: #6f9f69;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-paginacion:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.texto-pagina {
+    font-size: 14px;
+}
+
+/* Formulario de edición */
+.formulario-cita {
+    background-color: #D3ECD0;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 32%;
+    border: 2px solid #6f9f69;
+    display: none;
+}
+
+.formulario-cita.activo {
+    display: block;
+}
+
+.titulo-formulario {
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.campo-formulario {
+    margin-bottom: 15px;
+}
+
+.label-campo {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+
+.input-campo,
+.select-categoria,
+.select-servicio {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.botones-formulario {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.btn-form {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-guardar {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.btn-cancelar {
+    background-color: #f44336;
+    color: white;
+}
+
+/* Modal de confirmación */
+.modal-contenedor {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-contenedor.activo {
+    display: flex;
+}
+
+.modal-contenido {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    min-width: 300px;
+    text-align: center;
+}
+
+.modal-titulo {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.modal-mensaje {
+    margin-bottom: 20px;
+}
+
+.botones-modal {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.btn-modal {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-eliminar {
+    background-color: #f44336;
+    color: white;
+}
+
+/* Estilos responsivos */
+@media (max-width: 1024px) {
+    #contenedorPrincipal-gestionCitas {
+        flex-direction: column;
+        padding: 15px;
+    }
+    
+    .tabla-citas, 
+    .formulario-cita {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    
+    .input-buscar {
+        width: 150px;
+    }
+    
+    .panel-superior {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .buscador-contenedor {
+        width: 100%;
+    }
+    
+    .input-buscar {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .tabla-encabezado .fila-encabezado th,
+    .tabla-cuerpo tr td {
+        padding: 8px;
+    }
+    
+    .accion-btn {
+        padding: 5px;
+    }
+    
+    .botones-formulario, 
+    .botones-modal {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .btn-form, 
+    .btn-modal {
+        width: 100%;
+    }
+}
+
+/* Gestionar Citas */
+
+.texto-general {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    font-size: 1rem;
+}
+
+.btn-regresar {
+    position: absolute;
+    left: 2rem;
+    top: 2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    text-decoration: none;
+    font-family: 'Segoe UI', sans-serif;
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+    color: #2b8a3e;
+    border: 1px solid #d3f9d8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.btn-regresar i {
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+.btn-regresar:hover {
+    background-color: #ebfbee;
+    color: #2b8a3e;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+}
+
+.btn-regresar:hover i {
+    transform: translateX(-3px);
+}
+
+.btn-regresar:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.encabezado-seccion {
+    position: relative;
+    padding-top: 1rem;
 }
 
 

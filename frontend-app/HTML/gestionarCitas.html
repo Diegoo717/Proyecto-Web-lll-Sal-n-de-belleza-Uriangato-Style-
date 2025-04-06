@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
+    <title>Gestión de Citas</title>
+    <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Estilos para el botón de regreso */
+        .btn-regresar {
+            position: absolute;
+            left: 2rem;
+            top: 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background-color: #f8f9fa;
+            color: #2b8a3e;
+            border: 1px solid #d3f9d8;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            z-index: 10;
+        }
+
+        .btn-regresar i {
+            font-size: 0.9rem;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-regresar:hover {
+            background-color: #ebfbee;
+            color: #2b8a3e;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .btn-regresar:hover i {
+            transform: translateX(-3px);
+        }
+
+        .btn-regresar:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .encabezado-seccion {
+            position: relative;
+            padding-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <header id="encabezado-gestionCitas" class="encabezado-seccion">
+        <a href="http://localhost:4000/HTML/administracion.html" class="btn-regresar">
+            <i class="fas fa-chevron-left"></i>
+            <span>Volver al panel</span>
+        </a>
+        <h1 class="titulo-principal">Gestión de Citas</h1>
+    </header>
+
+    <main id="contenedorPrincipal-gestionCitas" class="contenedor-principal">
+        <section id="seccionTablaCitas" class="tabla-citas">
+            <div class="panel-superior">
+                <h2 class="titulo-panel texto-general">Citas Agendadas</h2>
+                <div class="buscador-contenedor">
+                    <input type="text" id="inputBuscar" class="input-buscar texto-general" placeholder="Buscar por nombre o email...">
+                    <button id="btnBuscar" class="btn-buscar texto-general"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+
+            <div id="mensajeAlerta" class="mensaje-alerta texto-general"></div>
+
+            <div class="contenedor-tabla">
+                <table id="tablaCitas" class="tabla-datos texto-general">
+                    <thead class="tabla-encabezado">
+                        <tr class="fila-encabezado">
+                            <th class="columna-id texto-general">ID</th>
+                            <th class="columna-nombre texto-general">Nombre Completo</th>
+                            <th class="columna-email texto-general">Email</th>
+                            <th class="columna-fecha texto-general">Fecha y Hora</th>
+                            <th class="columna-categoria texto-general">Categoría</th>
+                            <th class="columna-servicio texto-general">Servicio</th>
+                            <th class="columna-acciones texto-general">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpoTabla" class="tabla-cuerpo texto-general">
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="paginacion-contenedor">
+                <button id="btnAnterior" class="btn-paginacion btn-anterior texto-general" disabled><i class="fas fa-chevron-left"></i> Anterior</button>
+                <span id="paginaActual" class="texto-pagina texto-general">Página 1</span>
+                <button id="btnSiguiente" class="btn-paginacion btn-siguiente texto-general">Siguiente <i class="fas fa-chevron-right"></i></button>
+            </div>
+        </section>
+
+        <section id="formularioCita" class="formulario-cita">
+            <h2 id="tituloFormulario" class="titulo-formulario texto-general">Editar Cita</h2>
+            <form id="formEditarCita" class="form-editar">
+                <input type="hidden" id="citaId" class="input-id">
+
+                <div class="campo-formulario">
+                    <label for="nombreCompleto" class="label-campo texto-general">Nombre Completo:</label>
+                    <input type="text" id="nombreCompleto" class="input-campo input-nombre texto-general" required>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="email" class="label-campo texto-general">Email:</label>
+                    <input type="email" id="email" class="input-campo input-email texto-general" required>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="fechaHora" class="label-campo texto-general">Fecha y Hora:</label>
+                    <input type="datetime-local" id="fechaHora" class="input-campo input-fecha texto-general" required>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="categoria" class="label-campo texto-general">Categoría:</label>
+                    <select id="categoria" class="input-campo select-categoria texto-general" required>
+                    </select>
+                </div>
+
+                <div class="campo-formulario">
+                    <label for="servicio" class="label-campo texto-general">Servicio:</label>
+                    <select id="servicio" class="input-campo select-servicio texto-general" required>
+                        <option value="" class="option-default texto-general">Seleccione un servicio</option>
+                    </select>
+                </div>
+
+                <div class="botones-formulario">
+                    <button type="submit" class="btn-form btn-guardar texto-general">Guardar Cambios</button>
+                    <button type="button" id="btnCancelar" class="btn-form btn-cancelar texto-general">Cancelar</button>
+                </div>
+            </form>
+        </section>
+
+        <div id="modalConfirmacion" class="modal-contenedor">
+            <div class="modal-contenido">
+                <h3 class="modal-titulo texto-general">Confirmar Eliminación</h3>
+                <p class="modal-mensaje texto-general">¿Está seguro que desea eliminar esta cita?</p>
+                <div class="botones-modal">
+                    <button id="btnConfirmarEliminar" class="btn-modal btn-eliminar texto-general">Eliminar</button>
+                    <button id="btnCancelarEliminar" class="btn-modal btn-cancelar texto-general">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../JS/gestionarCitas.js"></script>
+</body>
+</html>

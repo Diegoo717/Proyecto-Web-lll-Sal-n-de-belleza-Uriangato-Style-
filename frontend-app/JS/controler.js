@@ -27,3 +27,55 @@ article6.addEventListener("click", () => {
 article7.addEventListener("click", () => {
     window.location.href = "/HTML/agendarCita.html";
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const articles = document.querySelectorAll('.art-div-section, .art-aside-index');
+    
+    function randomPulse() {
+        // Detener cualquier animación previa
+        articles.forEach(article => {
+            article.classList.remove('random-pulse');
+            // Forzar reflow para reiniciar la animación
+            void article.offsetWidth;
+        });
+        
+        // Seleccionar 1-3 artículos al azar
+        const count = Math.floor(Math.random() * 3) + 1;
+        const selectedArticles = [];
+        
+        while(selectedArticles.length < count) {
+            const randomIndex = Math.floor(Math.random() * articles.length);
+            if(!selectedArticles.includes(articles[randomIndex])) {
+                selectedArticles.push(articles[randomIndex]);
+            }
+        }
+        
+        // Aplicar animación con escala aleatoria
+        selectedArticles.forEach(article => {
+            let scale;
+            if (article.id === "art-div-section-7") { // Solo para el artículo 7
+                scale = (Math.random() * 0.1) + 1.05; // Escala muy pequeña (1.01 a 1.06)
+            } else {
+                scale = (Math.random() * 0.3) + 1.05; // Escala normal (1.05 a 1.35)
+            }
+            article.style.setProperty('--scale-amount', scale);
+            article.classList.add('random-pulse');
+        });
+    }
+    
+    // Ejecutar 4 veces con 1s de intervalo, luego esperar 4s
+    function runAnimationSequence() {
+        let counter = 0;
+        const interval = setInterval(() => {
+            randomPulse();
+            counter++;
+            if(counter >= 4) {
+                clearInterval(interval);
+                setTimeout(runAnimationSequence, 4000); // Esperar 4s antes de reiniciar
+            }
+        }, 1000);
+    }
+    
+    // Iniciar la secuencia
+    runAnimationSequence();
+});

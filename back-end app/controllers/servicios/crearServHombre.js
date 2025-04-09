@@ -1,0 +1,44 @@
+const Hombre = require('../../models/Hombre');
+
+const crearHombre = async (req, res) => {
+    try {
+        const { 
+            DirecImgServicio, 
+            NombreServicio, 
+            CostoServicio, 
+            DescripcionServicio 
+        } = req.body;
+
+        // Validación básica
+        if (!DirecImgServicio || !NombreServicio || !CostoServicio || !DescripcionServicio) {
+            return res.status(400).json({ error: 'Todos los campos son obligatorios' });
+        }
+
+        // Asegurar que CostoServicio sea un número
+        const costoNumerico = parseFloat(CostoServicio);
+        if (isNaN(costoNumerico)) {
+            return res.status(400).json({ error: 'El costo debe ser un valor numérico' });
+        }
+
+        const nuevoHombre = await Hombre.create({
+            DirecImgServicio,
+            NombreServicio,
+            CostoServicio: costoNumerico, // Guardar como número
+            DescripcionServicio
+        });
+
+        res.status(201).json({
+            mensaje: 'Servicio creado exitosamente',
+            data: nuevoHombre
+        });
+
+    } catch (error) {
+        console.error("Error al crear servicio:", error);
+        res.status(500).json({ 
+            error: "Error interno del servidor",
+            detalles: error.message 
+        });
+    }
+};
+
+module.exports = { crearHombre };

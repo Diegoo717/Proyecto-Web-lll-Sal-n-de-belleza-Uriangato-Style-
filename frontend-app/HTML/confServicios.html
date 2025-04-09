@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/styles.css">
+    <title>Configurar Servicios</title>
+    <style>
+        /* Estilos para el botón de regreso */
+        .btn-regresar {
+            position: absolute;
+            left: 2rem;
+            top: 2rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-family: 'Segoe UI', sans-serif;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            background-color: #f8f9fa;
+            color: #2b8a3e;
+            border: 1px solid #d3f9d8;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            z-index: 10;
+        }
+
+        .btn-regresar i {
+            font-size: 0.9rem;
+            transition: transform 0.3s ease;
+        }
+
+        .btn-regresar:hover {
+            background-color: #ebfbee;
+            color: #2b8a3e;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transform: translateY(-1px);
+        }
+
+        .btn-regresar:hover i {
+            transform: translateX(-3px);
+        }
+
+        .btn-regresar:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .encabezado-seccion {
+            position: relative;
+            padding-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    
+    <header id="encabezado-administrador">
+        <button id="btnRegresar" class="btn-regresar">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>
+            </svg>
+            Regresar
+        </button>
+        <h4>CONFIGURAR SERVICIOS</h4>
+    </header>
+
+    <main id="contenedorPrincipal-administracion-serv">
+
+        <section class="secciones-administrador-serv">
+
+            <article id="serv-hombre" class="art-section-main-administracion-serv">
+                <img src="https://cdn-icons-png.flaticon.com/512/2922/2922510.png" alt="Icono Hombre" width="100">
+                <h3>HOMBRE</h3>
+            </article>
+
+            <article id="serv-mujer" class="art-section-main-administracion-serv">
+                <img src="https://cdn-icons-png.flaticon.com/512/2922/2922561.png" alt="Icono Mujer" width="100">
+                <h3>MUJER</h3>
+            </article>
+
+            <article id="serv-ninos" class="art-section-main-administracion-serv">
+                <img src="https://cdn-icons-png.flaticon.com/512/4325/4325941.png" alt="Icono Niños/Niñas" width="100">
+                <h3>NIÑOS/NIÑAS</h3>
+            </article>
+
+        </section>
+
+    </main>
+
+    <script>
+        document.getElementById("serv-hombre").addEventListener("click", function() {
+            window.location.href = "http://localhost:4000/HTML/adminServHombre.html";
+        });
+
+        document.getElementById("serv-mujer").addEventListener("click", function() {
+            window.location.href = "http://localhost:4000/HTML/adminServMujer.html";
+        });
+
+        document.getElementById("serv-ninos").addEventListener("click", function() {
+            window.location.href = "http://localhost:4000/HTML/adminServNinos.html";
+        });
+
+        // Event listener para el botón de regresar
+        document.getElementById("btnRegresar").addEventListener("click", function() {
+            window.location.href = "http://localhost:4000/HTML/administracion.html";
+        });
+    </script>
+
+</body>
+</html>

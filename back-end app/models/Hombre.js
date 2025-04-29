@@ -14,7 +14,6 @@ const Hombre = sequelize.define('Hombre', {
         type: DataTypes.DECIMAL(10, 2),
         allowNull: false,
         get() {
-            // Esto asegura que siempre devuelva un número
             const value = this.getDataValue('CostoServicio');
             return parseFloat(value);
         }

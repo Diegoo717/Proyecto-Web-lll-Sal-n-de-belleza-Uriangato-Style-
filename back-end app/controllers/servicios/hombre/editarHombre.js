@@ -1,4 +1,4 @@
-const Hombre = require('../../models/Hombre');
+const Hombre = require('../../../models/Hombre');
 
 const actualizarHombre = async (req, res) => {
     try {
@@ -16,7 +16,6 @@ const actualizarHombre = async (req, res) => {
             return res.status(404).json({ error: 'Servicio no encontrado' });
         }
 
-        // Actualizar campos
         hombre.DirecImgServicio = DirecImgServicio;
         hombre.NombreServicio = NombreServicio;
         hombre.CostoServicio = CostoServicio;

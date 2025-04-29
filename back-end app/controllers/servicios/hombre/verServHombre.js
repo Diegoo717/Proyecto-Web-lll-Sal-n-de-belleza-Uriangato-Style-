@@ -1,10 +1,9 @@
-const Hombre = require('../../models/Hombre');
+const Hombre = require('../../../models/Hombre');
 
 const verServHombre = async (req, res) => {
     try {
-        // Obtener todos los servicios ordenados por ID
         const servicios = await Hombre.findAll({
-            order: [['id', 'ASC']] // Orden ascendente por ID
+            order: [['id', 'ASC']] 
         });
         
         if (!servicios || servicios.length === 0) {
@@ -14,15 +13,14 @@ const verServHombre = async (req, res) => {
                 data: []
             });
         }
-        
-        // Formatear los datos de imagen para rutas locales y asegurar que CostoServicio sea número
+
         const serviciosFormateados = servicios.map(servicio => ({
             id: servicio.id,
             DirecImgServicio: servicio.DirecImgServicio.startsWith('/')
                 ? servicio.DirecImgServicio
                 : `/img/servicios/${servicio.DirecImgServicio}`,
             NombreServicio: servicio.NombreServicio,
-            CostoServicio: parseFloat(servicio.CostoServicio), // Aseguramos que sea número
+            CostoServicio: parseFloat(servicio.CostoServicio), 
             DescripcionServicio: servicio.DescripcionServicio,
             createdAt: servicio.createdAt,
             updatedAt: servicio.updatedAt

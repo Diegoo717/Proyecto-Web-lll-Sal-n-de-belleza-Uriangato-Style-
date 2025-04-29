@@ -1,10 +1,9 @@
-const Hombre = require('../../models/Hombre');
+const Hombre = require('../../../models/Hombre');
 
 const eliminarHombre = async (req, res) => {
     try {
         const { id } = req.params;
 
-        // Verificar si el servicio existe
         const servicio = await Hombre.findByPk(id);
         if (!servicio) {
             return res.status(404).json({
@@ -13,7 +12,6 @@ const eliminarHombre = async (req, res) => {
             });
         }
 
-        // Eliminar el servicio
         await servicio.destroy();
 
         res.status(200).json({

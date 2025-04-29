@@ -1,4 +1,4 @@
-const Hombre = require('../../models/Hombre');
+const Hombre = require('../../../models/Hombre');
 
 const obtenerHombrePorId = async (req, res) => {
     try {

@@ -1,4 +1,4 @@
-const Hombre = require('../../models/Hombre');
+const Hombre = require('../../../models/Hombre');
 
 const crearHombre = async (req, res) => {
     try {
@@ -9,12 +9,10 @@ const crearHombre = async (req, res) => {
             DescripcionServicio 
         } = req.body;
 
-        // Validación básica
         if (!DirecImgServicio || !NombreServicio || !CostoServicio || !DescripcionServicio) {
             return res.status(400).json({ error: 'Todos los campos son obligatorios' });
         }
 
-        // Asegurar que CostoServicio sea un número
         const costoNumerico = parseFloat(CostoServicio);
         if (isNaN(costoNumerico)) {
             return res.status(400).json({ error: 'El costo debe ser un valor numérico' });
@@ -23,7 +21,7 @@ const crearHombre = async (req, res) => {
         const nuevoHombre = await Hombre.create({
             DirecImgServicio,
             NombreServicio,
-            CostoServicio: costoNumerico, // Guardar como número
+            CostoServicio: costoNumerico, 
             DescripcionServicio
         });
 

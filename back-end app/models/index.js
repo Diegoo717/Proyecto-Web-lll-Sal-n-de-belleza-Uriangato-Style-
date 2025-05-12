@@ -1,5 +1,7 @@
 const sequelize = require('../config/database');
-const Cita = require('./Cita');
+const Cita = require('./cita');
+const Hombre = require('./Hombre');
+const Mujer = require('./Mujer');
 
 const syncDatabase = async () => {
     try {
@@ -12,4 +14,4 @@ const syncDatabase = async () => {
 
 syncDatabase();
 
-module.exports = { Cita };
+module.exports = { Cita, Hombre, Mujer };

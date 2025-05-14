@@ -12,3 +12,5 @@ router.get('/verServNiños', verServNiño);
 router.delete('/niños/:id', eliminarNiño);
 router.get('/niños/:id', obtenerNiñoPorId);
 router.put('/actualizarNiño/:id', actualizarNiño);
+
+module.exports = router;

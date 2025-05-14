@@ -1,40 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración</title>
     <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="../CSS/styles.css">
-    <title>Administración</title>
 </head>
-<body>
+<body class="body-Administracion">
     
     <header id="encabezado-administrador">
         <h4>PANEL DE ADMINISTRACIÓN</h4>
+        <button id="logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Cerrar Sesión
+        </button>
     </header>
 
     <main id="contenedorPrincipal-administracion">
-
         <section class="secciones-administrador">
-
             <article id="art-div-section-1-admin" class="art-section-main-administracion">
-                <img src="../Resources/Iconos/citas.png" alt="">
+                <img src="https://cdn-icons-png.flaticon.com/512/3652/3652191.png" alt="Citas" width="100">
                 <h2>GESTIONAR CITAS</h2>
             </article>
-
         </section>
+
         <section class="secciones-administrador">
-
             <article id="art-div-section-2-admin" class="art-section-main-administracion">
-                <img src="../Resources/Iconos/config.png" alt="">
-                <h2>CONFIGURACION</h2>
+                <img src="https://cdn-icons-png.flaticon.com/512/1265/1265531.png" alt="Configuración" width="100">
+                <h2>CONFIGURACIÓN</h2>
             </article>
-
         </section>
 
+        <section class="secciones-administrador">
+            <article id="art-div-section-3-admin" class="art-section-main-administracion">
+                <img src="../Resources/Imagenes/reportes.png" alt="Reportes" width="100">
+                <h2>REPORTES</h2>
+            </article>
+        </section>
     </main>
 
     <script src="../JS/adminRedirec.js"></script>
-
 </body>
 </html>

@@ -331,109 +331,148 @@ body{
     border-radius: 10%;
 }
 
-/* Administrador */
+/* Administracion Panel */
 
-#encabezado-administrador{
+.body-Administracion {
+    background-color: #EFE2CF;
     margin: 0;
-    background-color: #D3ECD0;
+    min-height: 100vh;
+    font-family: 'Titan One', cursive;
+    overflow-y: hidden;
+}
+
+/* Encabezado */
+#encabezado-administrador {
+    margin: 0;
+    background-color: #85d37c;
     min-height: 100px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     color: white;
     font-size: 25px;
     -webkit-text-stroke: 1px black;
-    border-bottom:  3px solid #6f9f69;
+    border-bottom: 3px solid #3a5a36;
+    padding: 0 30px;
+    position: relative;
 }
 
-.secciones-administrador{
+#logout-btn {
+    background-color: #3a5a36;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+    -webkit-text-stroke: 0.5px black;
+    font-family: 'Titan One', cursive;
+}
+
+#logout-btn:hover {
+    background-color: #2d4534;
+    transform: scale(1.05);
+}
+
+/* Contenedor principal */
+#contenedorPrincipal-administracion {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    flex-wrap: wrap;
+    min-height: calc(100vh - 100px);
+}
+
+/* Secciones */
+.secciones-administrador {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50%;
-    height: 86vh;
+    width: 30%;
+    min-height: 300px;
+    margin: 15px 0;
 }
 
-.secciones-administrador-serv{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+/* Artículos */
+.art-section-main-administracion {
+    background-color: #85d37c;
     width: 100%;
-    height: 86vh;
-}
-
-#contenedorPrincipal-administracion-serv{
-    display: flex;
-   justify-content: space-around;
-   align-items: center;
-   padding-left: 100px;
-   padding-right: 100px;
-}
-
-#contenedorPrincipal-administracion{
-   display: flex;
-   justify-content: space-around;
-   align-items: center;
-   padding-left: 100px;
-   padding-right: 100px;
-}
-
-.art-section-main-administracion{
-    background-color: #D3ECD0;
-    width: 60%;
-    height: 70%;
+    height: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #8FA58D;
+    color: white;
     -webkit-text-stroke: 1px black;
     flex-direction: column;
-    border-radius: 10%;
-    border: 3px solid #6f9f69;
+    border-radius: 20px;
+    border: 3px solid #3a5a36;
     transition: transform 0.3s ease-in-out;
-}
-
-.art-section-main-administracion-serv{
-    background-color: #D3ECD0;
-    width: 50%;
-    height: 55%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #8FA58D;
-    -webkit-text-stroke: 1px black;
-    flex-direction: column;
-    border-radius: 10%;
-    border: 3px solid #6f9f69;
-    transition: transform 0.3s ease-in-out;
-    margin: 30px;
-}
-
-.art-section-main-administracion-serv:hover {
-    transform: scale(1.1);
-}
-
-.art-section-main-administracion h2{
-    margin-top: 50px;
-    font-size: 30px;
+    cursor: pointer;
+    text-align: center;
+    padding: 20px;
 }
 
 .art-section-main-administracion:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
 }
 
-@media (max-width: 768px){
-    #contenedorPrincipal-administracion{
-        width: 100%;
+.art-section-main-administracion h2 {
+    margin-top: 20px;
+    font-size: 24px;
+}
+
+.art-section-main-administracion img {
+    max-width: 100px;
+    height: auto;
+    margin-bottom: 15px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .secciones-administrador {
+        width: 45%;
+    }
+}
+
+@media (max-width: 768px) {
+    #contenedorPrincipal-administracion {
         flex-direction: column;
-        padding: 0;
+        padding: 10px;
     }
-    .secciones-administrador{
-        width: 80%;
-    }
-    .art-section-main-administracion{
+    
+    .secciones-administrador {
         width: 90%;
+        margin: 10px 0;
+    }
+    
+    #encabezado-administrador {
+        flex-direction: column;
+        padding: 15px;
         text-align: center;
+    }
+    
+    #logout-btn {
+        margin-top: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .art-section-main-administracion {
+        height: 250px;
+    }
+    
+    .art-section-main-administracion h2 {
+        font-size: 20px;
+    }
+    
+    #encabezado-administrador h4 {
+        font-size: 20px;
     }
 }
 
@@ -765,12 +804,19 @@ button:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+
+
+
 /*gestionar citas*/
 
 /* Encabezado */
 #encabezado-gestionCitas {
+    width: 100vw; 
+    box-sizing: border-box; 
+    position: relative; 
+    padding: 0 20px; 
     margin: 0;
-    background-color: #D3ECD0;
+    background-color: #85d37c;
     min-height: 100px;
     display: flex;
     justify-content: center;
@@ -778,7 +824,11 @@ button:hover {
     color: white;
     font-size: 25px;
     -webkit-text-stroke: 1px black;
-    border-bottom: 3px solid #6f9f69;
+    border-bottom: 3px solid #3a5a36;
+}
+
+.body-gestCitas{
+    overflow-x: hidden;
 }
 
 .titulo-principal {
@@ -791,6 +841,10 @@ button:hover {
     justify-content: center;
     padding: 30px;
     position: relative;
+    background-color: #EFE2CF;
+    width: 100%;
+    min-height: 90vh;
+    box-sizing: border-box;
 }
 
 /* Sección de tabla de citas */
@@ -800,8 +854,10 @@ button:hover {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 20px;
     width: 65%;
-    min-height: 75vh;
-    border: 2px solid #6f9f69;
+    min-height: 60vh;
+    border: 3px solid #3a5a36;
+    box-shadow: inset 0 0 0 3px #3a5a36;
+    position: relative;
 }
 
 .panel-superior {
@@ -812,7 +868,7 @@ button:hover {
 }
 
 .titulo-panel {
-    color: #6f9f69;
+    color: #85d37c;
     font-size: 24px;
     margin: 0;
 }
@@ -831,7 +887,7 @@ button:hover {
 
 .btn-buscar {
     padding: 10px 15px;
-    background-color: #6f9f69;
+    background-color: #85d37c;
     color: white;
     border: none;
     border-radius: 0 5px 5px 0;
@@ -860,13 +916,19 @@ button:hover {
 }
 
 .contenedor-tabla {
+    width: 100%;
     overflow-x: auto;
-    margin-bottom: 20px;
+    -webkit-overflow-scrolling: touch;
+    margin: 0 auto;
+    padding: 0 5px;
+    box-sizing: border-box;
 }
 
 .tabla-datos {
     width: 100%;
+    min-width: 600px;
     border-collapse: collapse;
+    margin: 0 auto;
 }
 
 .tabla-encabezado .fila-encabezado th,
@@ -877,7 +939,7 @@ button:hover {
 }
 
 .tabla-encabezado .fila-encabezado th {
-    background-color: #D3ECD0;
+    background-color: #85d37c;
     color: #333;
     font-weight: bold;
 }
@@ -915,7 +977,7 @@ button:hover {
 
 .btn-paginacion {
     padding: 8px 15px;
-    background-color: #6f9f69;
+    background-color: #85d37c;
     color: white;
     border: none;
     border-radius: 5px;
@@ -933,12 +995,12 @@ button:hover {
 
 /* Formulario de edición */
 .formulario-cita {
-    background-color: #D3ECD0;
+    background-color: #85d37c;
     border-radius: 10px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 20px;
     width: 32%;
-    border: 2px solid #6f9f69;
+    border: 3px solid #3a5a36;
     display: none;
 }
 
@@ -1048,27 +1110,85 @@ button:hover {
     color: white;
 }
 
+.texto-general {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    font-size: 1rem;
+}
+
+.btn-regresar {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    background-color: #3a5a36;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    font-family: 'Titan One', cursive;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+    -webkit-text-stroke: 0.5px black;
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.btn-regresar i {
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+.btn-regresar:hover {
+    background-color: #2d4534;
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn-regresar:hover i {
+    transform: translateX(-3px);
+}
+
+.btn-regresar:active {
+    transform: scale(1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 /* Estilos responsivos */
-@media (max-width: 1024px) {
+/* Media Queries para responsividad */
+
+/* Pantallas medianas (tablets) */
+@media (max-width: 992px) {
     #contenedorPrincipal-gestionCitas {
         flex-direction: column;
-        padding: 15px;
+        padding: 15px 5px;
+    }
+
+    #contenedorPrincipal-gestionCitas{
+        padding-right: 60px;
+        padding-left: 20px;
+        min-height: 90vh;
+    }
+
+    .contenedor-tabla {
+        padding: 20px;
     }
     
     .tabla-citas, 
     .formulario-cita {
         width: 100%;
         margin-bottom: 20px;
-    }
-    
-    .input-buscar {
-        width: 150px;
+        margin-left: 0;
     }
     
     .panel-superior {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
         gap: 15px;
+        padding: 0 5px;
     }
     
     .buscador-contenedor {
@@ -1077,17 +1197,79 @@ button:hover {
     
     .input-buscar {
         width: 100%;
+        max-width: 100%;
+    }
+    
+    .btn-regresar {
+        position: relative;
+        left: auto;
+        top: auto;
+        margin-bottom: 15px;
+        align-self: flex-start;
+    }
+    
+    #encabezado-gestionCitas {
+        flex-direction: column;
+        padding: 20px 15px;
+        text-align: center;
+    }
+
+    .contenedor-tabla {
+        overflow-x: scroll;
+        -webkit-overflow-scrolling: touch;
+        position: relative;
+    }
+    
+    .tabla-datos {
+        display: block;
+        white-space: nowrap;
     }
 }
 
+/* Pantallas pequeñas (móviles grandes) */
 @media (max-width: 768px) {
     .tabla-encabezado .fila-encabezado th,
     .tabla-cuerpo tr td {
-        padding: 8px;
+        padding: 8px 5px;
+        font-size: 0.9rem;
+    }
+
+    #contenedorPrincipal-gestionCitas{
+        padding-right: 40px;
+        padding-left: 20px;
+        min-height: 90vh;
+    }
+
+    .contenedor-tabla {
+        padding: 20px;
     }
     
-    .accion-btn {
-        padding: 5px;
+    .columna-id, .columna-acciones {
+        display: none;
+    }
+    
+    .tabla-citas {
+        padding: 10px;
+        width: calc(100% + 10px);
+        margin: 0 -5px;
+    }
+    
+    .titulo-principal {
+        font-size: 1.5rem;
+        -webkit-text-stroke: 0.5px black;
+    }
+    
+    .titulo-panel {
+        font-size: 1.2rem;
+    }
+    
+    .btn-paginacion {
+        padding: 6px 10px;
+        font-size: 0.9rem;
+    }
+    
+    .formulario-cita {
+        padding: 15px;
     }
     
     .botones-formulario, 
@@ -1102,59 +1284,101 @@ button:hover {
     }
 }
 
-/* Gestionar Citas */
+/* Pantallas muy pequeñas (móviles pequeños) */
+@media (max-width: 576px) {
+    #encabezado-gestionCitas {
+        min-height: 80px;
+        font-size: 20px;
+    }
 
-.texto-general {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    color: #333;
-    font-size: 1rem;
+    #contenedorPrincipal-gestionCitas{
+        padding-right: 40px;
+        padding-left: 20px;
+        min-height: 90vh;
+    }
+
+    .contenedor-tabla {
+        padding: 20px;
+    }
+    
+    .tabla-encabezado .fila-encabezado th,
+    .tabla-cuerpo tr td {
+        padding: 6px 3px;
+        font-size: 0.8rem;
+    }
+    
+    .columna-email {
+        display: none;
+    }
+    
+    .accion-btn {
+        padding: 3px 6px;
+        font-size: 0.8rem;
+        margin: 2px 0;
+    }
+    
+    .paginacion-contenedor {
+        gap: 5px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .texto-pagina {
+        font-size: 0.8rem;
+        flex: 0 0 100%;
+        text-align: center;
+        margin: 5px 0;
+    }
+    
+    .modal-contenido {
+        min-width: 90%;
+        padding: 15px;
+    }
+    
+    .input-campo, .select-categoria, .select-servicio {
+        padding: 8px;
+    }
+
+    .btn-paginacion {
+        margin: 5px;
+        flex: 1 0 auto;
+        min-width: 100px;
+    }
 }
 
-.btn-regresar {
-    position: absolute;
-    left: 2rem;
-    top: 2rem;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.5rem;
-    border-radius: 50px;
-    text-decoration: none;
-    font-family: 'Segoe UI', sans-serif;
-    font-weight: 500;
-    font-size: 0.95rem;
-    transition: all 0.3s ease;
-    background-color: #f8f9fa;
-    color: #2b8a3e;
-    border: 1px solid #d3f9d8;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+/* Ajustes para tablas en móviles */
+@media (max-width: 480px) {
+    #contenedorPrincipal-gestionCitas{
+        padding-right: 40px;
+        padding-left: 20px;
+        min-height: 90vh;
+    }
+
+    .contenedor-tabla {
+        padding: 20px;
+    }
+    
+    .tabla-datos {
+        min-width: 50%;
+    }
+    
+    .columna-fecha, .columna-categoria {
+        display: none;
+    }
+    
+    .btn-regresar span {
+        display: none;
+    }
+    
+    .btn-regresar {
+        padding: 8px 12px;
+    }
+    
+    .btn-regresar i {
+        margin-right: 0;
+    }
+
+    .input-buscar {
+        max-width: 180px;
+    }
 }
-
-.btn-regresar i {
-    font-size: 0.9rem;
-    transition: transform 0.3s ease;
-}
-
-.btn-regresar:hover {
-    background-color: #ebfbee;
-    color: #2b8a3e;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transform: translateY(-1px);
-}
-
-.btn-regresar:hover i {
-    transform: translateX(-3px);
-}
-
-.btn-regresar:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-}
-
-.encabezado-seccion {
-    position: relative;
-    padding-top: 1rem;
-}
-
-
-

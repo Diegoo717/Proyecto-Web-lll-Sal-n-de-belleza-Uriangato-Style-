@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Administrador</title>
+    <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Titan One', cursive;
+        }
+
+        body {
+            background-color: #EFE2CF;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #login-container {
+            background-color: #85d37c;
+            width: 400px;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border: 3px solid #3a5a36;
+            text-align: center;
+        }
+
+        #login-container h2 {
+            color: white;
+            font-size: 28px;
+            margin-bottom: 30px;
+            -webkit-text-stroke: 1px black;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #497143;
+            font-size: 16px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #6f9f69;
+            border-radius: 8px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #8FA58D;
+        }
+
+        #login-btn {
+            background-color: #6f9f69;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            margin-top: 10px;
+            -webkit-text-stroke: 0.5px black;
+        }
+
+        #login-btn:hover {
+            background-color: #294b26;
+            transform: scale(1.05);
+        }
+
+        .login-footer {
+            margin-top: 20px;
+            color: #497143;
+            font-size: 14px;
+        }
+
+        @media (max-width: 480px) {
+            #login-container {
+                width: 90%;
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="login-container">
+        <h2>ACCESO ADMINISTRADOR</h2>
+        <form id="login-form">
+            <div class="input-group">
+                <label for="username">Usuario</label>
+                <input type="text" id="username" name="username" placeholder="Ingrese su usuario">
+            </div>
+            <div class="input-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" placeholder="Ingrese su contraseña">
+            </div>
+            <button type="submit" id="login-btn">INGRESAR</button>
+        </form>
+        <div class="login-footer">
+            <p>Solo personal autorizado</p>
+        </div>
+    </div>
+</body>
+</html>

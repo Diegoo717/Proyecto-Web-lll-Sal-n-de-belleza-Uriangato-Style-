@@ -13,6 +13,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Setup form validation
     setupFormValidation();
+
+    // Configurar el botón de cancelar
+    const btnCancelar = document.getElementById('btnCancelar');
+    const formularioCita = document.getElementById('formularioCita');
+
+    if (btnCancelar && formularioCita) {
+        btnCancelar.addEventListener("click", function() {
+            formularioCita.style.display = "none";
+            // Resetear el formulario al cancelar
+            document.getElementById('formEditarCita').reset();
+        });
+    }
 });
 
 function applyStyleFixes() {
@@ -55,7 +67,7 @@ function applyStyleFixes() {
         }
 
         .btn-eliminar {
-            background-color: #dc3545;  /* Color rojo */
+            background-color: #dc3545;
             color: white;
             border: none;
             padding: 5px 10px;
@@ -63,26 +75,37 @@ function applyStyleFixes() {
             cursor: pointer;
         }
 
-        .btn-editar  {
-            background-color:rgb(98, 181, 124);  
+        .btn-editar {
+            background-color: rgb(98, 181, 124);  
         }
         
         .btn-editar:hover {
-            background-color:rgb(30, 167, 46);  /* Azul más oscuro al pasar el mouse */
+            background-color: rgb(30, 167, 46);
         }
         
         .btn-eliminar:hover {
-            background-color: #c82333;  /* Rojo más oscuro al pasar el mouse */
+            background-color: #c82333;
+        }
+        
+        #btnCancelar {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        
+        #btnCancelar:hover {
+            background-color: #5a6268;
         }
     `;
-
     
     document.head.appendChild(style);
 }
 
-// Setup form validation
 function setupFormValidation() {
-    // Get form elements
     const formEditarCita = document.getElementById('formEditarCita');
     const nombreCompletoInput = document.getElementById('nombreCompleto');
     const emailInput = document.getElementById('email');
@@ -90,25 +113,21 @@ function setupFormValidation() {
     const categoriaSelect = document.getElementById('categoria');
     const servicioSelect = document.getElementById('servicio');
     
-    // Add error message elements after each input
     addErrorMessageElement('nombreCompleto');
     addErrorMessageElement('email');
     addErrorMessageElement('fechaHora');
     addErrorMessageElement('categoria');
     addErrorMessageElement('servicio');
     
-    // Track interaction state
     let nombreInteracted = false;
     let emailInteracted = false;
     let fechaInteracted = false;
     let categoriaInteracted = false;
     let servicioInteracted = false;
     
-    // Regular expressions for validation
     const nombreRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     
-    // Add event listeners for real-time validation
     nombreCompletoInput.addEventListener('blur', () => {
         nombreInteracted = true;
         validateNombreCompleto();
@@ -134,7 +153,6 @@ function setupFormValidation() {
         validateServicio();
     });
     
-    // Validation functions
     function validateNombreCompleto() {
         const value = nombreCompletoInput.value.trim();
         if (!nombreInteracted) return false;
@@ -175,8 +193,6 @@ function setupFormValidation() {
         
         const selectedDate = new Date(fechaHoraInput.value);
         const now = new Date();
-        
-        // Minimum date must be at least 24 hours from now
         const minDate = new Date(now.getTime() + 24 * 60 * 60 * 1000);
         
         if (!fechaHoraInput.value) {
@@ -215,7 +231,6 @@ function setupFormValidation() {
         }
     }
     
-    // Helper functions for validation UI
     function showInvalid(element, message) {
         element.classList.remove('valid');
         element.classList.add('invalid');
@@ -239,11 +254,9 @@ function setupFormValidation() {
         input.parentNode.insertBefore(errorElement, input.nextSibling);
     }
     
-    // Update form submission to include validation
     formEditarCita.addEventListener('submit', async (e) => {
         e.preventDefault();
         
-        // Trigger all validations
         nombreInteracted = true;
         emailInteracted = true;
         fechaInteracted = true;
@@ -268,7 +281,6 @@ function setupFormValidation() {
             return;
         }
         
-        // Continue with the original form submission logic
         const id = document.getElementById('citaId').value;
         const nombre = document.getElementById('nombreCompleto').value;
         const email = document.getElementById('email').value;
@@ -402,7 +414,6 @@ function actualizarServicios() {
         servicioSelect.appendChild(option);
     });
     
-    // Trigger validation if category has been interacted with
     const categoriaSelect = document.getElementById('categoria');
     if (categoriaSelect.classList.contains('valid') || categoriaSelect.classList.contains('invalid')) {
         const event = new Event('change');
@@ -456,10 +467,8 @@ function agregarEventosEliminar() {
 
     botonesEliminar.forEach(boton => {
         boton.addEventListener('click', (e) => {
-            // Obtener el ID correctamente del atributo data-id
             const idCita = e.currentTarget.getAttribute('data-id');
             
-            // Verificar que tenemos un ID válido
             if (!idCita || idCita === 'null') {
                 console.error('ID de cita no válido');
                 return;
@@ -513,18 +522,15 @@ function agregarEventosEditar() {
             document.getElementById('email').value = email;
             document.getElementById('fechaHora').value = fecha.toISOString().slice(0, 16);
             
-            // Set category and update services
             document.getElementById('categoria').value = categoria;
             actualizarServicios();
             
-            // Set service after services are populated
             setTimeout(() => {
                 document.getElementById('servicio').value = servicio;
             }, 100);
 
             document.getElementById('formularioCita').style.display = 'block';
             
-            // Reset validation visual states when opening the form
             const formElements = document.querySelectorAll('.input-campo');
             formElements.forEach(el => {
                 el.classList.remove('valid');
@@ -574,7 +580,6 @@ async function eliminarCita(id) {
     }
 }
 
-// Añadir funcionalidad de búsqueda
 document.getElementById('btnBuscar').addEventListener('click', () => {
     buscarCitas();
 });

@@ -1,4 +1,4 @@
-const { Cita } = require('../models');
+const  Cita  = require('../models/cita');
 
 const eliminarCita = async (req, res) => {
     try {

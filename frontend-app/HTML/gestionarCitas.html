@@ -7,57 +7,9 @@
     <title>Gestión de Citas</title>
     <link rel="stylesheet" href="../CSS/styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Estilos para el botón de regreso */
-        .btn-regresar {
-            position: absolute;
-            left: 2rem;
-            top: 2rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.75rem 1.5rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-family: 'Segoe UI', sans-serif;
-            font-weight: 500;
-            font-size: 0.95rem;
-            transition: all 0.3s ease;
-            background-color: #f8f9fa;
-            color: #2b8a3e;
-            border: 1px solid #d3f9d8;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            z-index: 10;
-        }
 
-        .btn-regresar i {
-            font-size: 0.9rem;
-            transition: transform 0.3s ease;
-        }
-
-        .btn-regresar:hover {
-            background-color: #ebfbee;
-            color: #2b8a3e;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transform: translateY(-1px);
-        }
-
-        .btn-regresar:hover i {
-            transform: translateX(-3px);
-        }
-
-        .btn-regresar:active {
-            transform: translateY(0);
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-        }
-
-        .encabezado-seccion {
-            position: relative;
-            padding-top: 1rem;
-        }
-    </style>
 </head>
-<body>
+<body class="body-gestCitas">
     <header id="encabezado-gestionCitas" class="encabezado-seccion">
         <a href="http://localhost:4000/HTML/administracion.html" class="btn-regresar">
             <i class="fas fa-chevron-left"></i>

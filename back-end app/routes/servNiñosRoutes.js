@@ -7,10 +7,10 @@ const { eliminarNiño } = require('../controllers/servicios/niños/eliminarServN
 const { obtenerNiñoPorId } = require('../controllers/servicios/niños/obtenerNiñoporID')
 const { verServNiño } = require('../controllers/servicios/niños/verServNiño')
 
-router.post('/niños', crearNiño);
-router.get('/verServNiños', verServNiño);
-router.delete('/niños/:id', eliminarNiño);
-router.get('/niños/:id', obtenerNiñoPorId);
-router.put('/actualizarNiño/:id', actualizarNiño);
+router.post('/ninos', crearNiño);
+router.get('/verServNinos', verServNiño);
+router.delete('/ninos/:id', eliminarNiño);
+router.get('/ninos/:id', obtenerNiñoPorId);
+router.put('/actualizarNino/:id', actualizarNiño);
 
 module.exports = router;

@@ -7,7 +7,7 @@ const { crearMujer } = require('../controllers/servicios/mujer/crearServMujer');
 const { eliminarMujer } = require('../controllers/servicios/mujer/eliminarServMujer');
 const { actualizarMujer } = require('../controllers/servicios/mujer/editarMujer');
 
-router.get('/mujeres', crearMujer);
+router.post('/mujeres', crearMujer);
 router.get('/verServMujeres', verServMujer);
 router.delete('/mujeres/:id', eliminarMujer);
 router.get('/mujeres/:id', obtenerMujerPorId);

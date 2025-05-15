@@ -25,7 +25,7 @@ const actualizarMujer = async (req, res) => {
 
         res.status(200).json({ 
             mensaje: 'Servicio actualizado exitosamente', 
-            data: hombre 
+            data: mujer 
         });
     } catch (error) {
         console.error("Error al actualizar el servicio:", error);

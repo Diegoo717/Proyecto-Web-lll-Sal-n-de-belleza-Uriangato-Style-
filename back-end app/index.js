@@ -19,7 +19,7 @@ app.use(express.static(path.join(__dirname, '../frontend-app')));
 app.use('/', authRoutes); 
 app.use('/servHombre', servHombreRoutes);
 app.use('/servMujer', servMujerRoutes);
-app.use('/servNiños', servNiñosRoutes);
+app.use('/servNino', servNiñosRoutes);
 
 const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => console.log(`Servidor corriendo en http://localhost:${PORT}`));

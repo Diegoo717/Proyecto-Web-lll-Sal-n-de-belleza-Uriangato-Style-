@@ -1,15 +1,16 @@
-/*adminServHombre*/
+/*adminServ*/
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f9fa;
+    background-color: #EFE2CF !important;
     color: #333;
 }
 
 .admin-container {
-    max-width: 1200px;
+    max-width: 100%;
+    min-height: 95vh;
     margin: 0 auto;
     padding: 20px;
+    margin-top: 5px;
 }
 
 .admin-header {
@@ -21,9 +22,17 @@ body {
     border-bottom: 1px solid #dee2e6;
 }
 
+h1{
+    font-family: 'Titan One', sans-serif;
+}
+
 .content-wrapper {
     display: flex;
     gap: 30px;
+    margin-top: 50px;
+    margin-left: 60px;
+    margin-right: 60px;
+    border-top: 3px solid #3a5a36;
 }
 
 .form-container {
@@ -70,6 +79,11 @@ body {
     height: 60px;
     object-fit: cover;
     border-radius: 4px;
+}
+
+.table thead th {
+    background-color: #85d37c !important;
+    color: black
 }
 
 .action-buttons {

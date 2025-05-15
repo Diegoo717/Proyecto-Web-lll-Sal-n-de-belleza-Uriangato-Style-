@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', () => {
+
+    document.body.style.visibility = 'hidden';
+    verificarYMostrar();
+
     // Add styling fixes
     applyStyleFixes();
     
@@ -26,6 +30,39 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+async function verificarYMostrar() {
+    try {
+        await verificarToken();
+
+        document.body.style.visibility = 'visible';
+        
+    } catch (error) {
+        console.error('Error de autenticación:', error);
+        redirigirALogin();
+    }
+}
+
+async function verificarToken() {
+    const token = localStorage.getItem('adminToken');
+    
+    if (!token) {
+        throw new Error('No hay token');
+    }
+
+    const response = await fetch('http://localhost:4000/admin/verify-token', {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+
+    if (!response.ok) {
+        throw new Error('Token inválido');
+    }
+    
+    return await response.json();
+}
 
 function applyStyleFixes() {
     // Fix form styling
@@ -604,4 +641,8 @@ function buscarCitas() {
             fila.style.display = 'none';
         }
     });
+}
+
+function redirigirALogin() {
+    window.location.href = 'http://localhost:4000/HTML/loginAdministracion.html';
 }

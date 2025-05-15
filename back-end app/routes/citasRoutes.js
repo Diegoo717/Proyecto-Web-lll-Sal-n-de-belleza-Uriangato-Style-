@@ -4,6 +4,7 @@ const { agendarCita} = require('../controllers/citaController');
 const { obtenerCitas } = require('../controllers/obtenerCitas'); 
 const { eliminarCita } = require('../controllers/eliminarCita');
 const { actualizarCita } = require('../controllers/actualizarCita');
+const authMiddleware = require('../middlewares/authMiddleware')
 
 const router = express.Router();
 

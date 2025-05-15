@@ -1,109 +1,181 @@
 let usernameInteracted = false;
-        let emailInteracted = false;
-        let datetimeInteracted = false;
-        let categoryInteracted = false;
-        let serviceInteracted = false;
+let emailInteracted = false;
+let datetimeInteracted = false;
+let categoryInteracted = false;
+let serviceInteracted = false;
 
-        function updateServices() {
-            const category = document.getElementById("category").value;
-            const serviceSelect = document.getElementById("service");
+// Función para guardar los datos del formulario en localStorage
+function saveFormData() {
+    const formData = {
+        username: usernameInput.value.trim(),
+        email: emailInput.value.trim(),
+        datetime: datetimeInput.value,
+        category: categorySelect.value,
+        service: serviceSelect.value
+    };
+    localStorage.setItem('appointmentFormData', JSON.stringify(formData));
+}
 
-            serviceSelect.innerHTML = "";
-
-            let services = [];
-            if (category === "hombre") {
-                services = ["Corte de cabello", "Rasurado tradicional", "Mascarilla negra carbón activado"];
-            } else if (category === "mujer") {
-                services = [
-                    "Corte de cabello en capas",
-                    "Corte recto",
-                    "Corte degrafilado",
-                    "Corte bob",
-                    "Depilación con hilo (cejas, rostro)",
-                    "Depilación con cera (axilas, piernas, brazos, rostro, bikini)",
-                    "Diseño de ceja",
-                    "Depilación con cera (ceja y bozo)",
-                    "Pestañas clásicas",
-                    "Pestañas efecto rímel",
-                    "Retiro de extensiones",
-                    "Lifting de pestañas",
-                    "Tinte completo",
-                    "Balayage",
-                    "Mechas 3D",
-                    "Babylights",
-                    "Peinado con ondas sueltas",
-                    "Recogidos para eventos",
-                    "Planchado exprés",
-                    "Peinado de novia y quinceañera",
-                    "Maquillaje social (de día o de noche)",
-                    "Maquillaje para eventos (bodas y XV años)",
-                    "Maquillaje con aerógrafo",
-                    "Maquillaje artístico o fantasía",
-                    "Uñas esculturales",
-                    "Nail art (diseños personalizados, pedrería, efecto cromo)",
-                    "Uñas encapsuladas",
-                    "Gelish",
-                    "Manicure tradicional",
-                    "Manicure spa",
-                    "Pedicure básico",
-                    "Pedicure spa (hidratación profunda)"
-                ];
-            } else if (category === "niños") {
-                services = [
-                    "Corte de cabello infantil", 
-                    "Peinados y trenzas tematicas", 
-                    "Manicura y pedicura infantil", 
-                    "Maquillaje Infantil", 
-                    "Tatuajes temporales y glitter", 
-                    "Spa infantil"
-                ];
-            }
-
-            if (services.length > 0) {
-                services.forEach(service => {
-                    let option = document.createElement("option");
-                    option.value = service.toLowerCase().replace(/\s+/g, "-"); 
-                    option.textContent = service;
-                    serviceSelect.appendChild(option);
-                });
-            } else {
-                let option = document.createElement("option");
-                option.value = "";
-                option.textContent = "Selecciona una categoría primero";
-                serviceSelect.appendChild(option);
-            }
+// Función para cargar los datos del formulario desde localStorage
+function loadFormData() {
+    const savedData = localStorage.getItem('appointmentFormData');
+    if (savedData) {
+        const formData = JSON.parse(savedData);
+        
+        // Restaurar valores
+        usernameInput.value = formData.username || '';
+        emailInput.value = formData.email || '';
+        datetimeInput.value = formData.datetime || '';
+        
+        // Restaurar categoría si existe
+        if (formData.category) {
+            categorySelect.value = formData.category;
+            updateServices(); // Esto regenera las opciones de servicio
             
-            if (categoryInteracted) validateCategory();
-            if (serviceInteracted) validateService();
-            checkFormValidity();
+            // Usamos setTimeout para asegurarnos que los servicios se hayan cargado
+            setTimeout(() => {
+                if (formData.service) {
+                    serviceSelect.value = formData.service;
+                }
+                
+                // Marcar como interactuados si hay valores
+                if (formData.username) {
+                    usernameInteracted = true;
+                    validateUsername();
+                }
+                if (formData.email) {
+                    emailInteracted = true;
+                    validateEmail();
+                }
+                if (formData.datetime) {
+                    datetimeInteracted = true;
+                    validateDatetime();
+                }
+                if (formData.category) {
+                    categoryInteracted = true;
+                    validateCategory();
+                }
+                if (formData.service) {
+                    serviceInteracted = true;
+                    validateService();
+                }
+                
+                checkFormValidity();
+            }, 0);
         }
+    }
+}
 
-        const form = document.getElementById('form-agendarCita');
-        const usernameInput = document.getElementById('username');
-        const emailInput = document.getElementById('email');
-        const datetimeInput = document.getElementById('datetime');
-        const categorySelect = document.getElementById('category');
-        const serviceSelect = document.getElementById('service');
-        const submitBtn = document.getElementById('submit-btn');
-        const confirmationModal = document.getElementById('confirmation-modal');
-        const okButton = document.getElementById('ok-button');
-        const appointmentDetails = document.getElementById('appointment-details');
+// Función para limpiar los datos del formulario en localStorage
+function clearFormData() {
+    localStorage.removeItem('appointmentFormData');
+}
 
-        const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+// Cargar datos al iniciar la página
+document.addEventListener('DOMContentLoaded', function() {
+    loadFormData();
+});
 
-        function showError(elementId, message) {
-            const errorElement = document.getElementById(elementId);
-            errorElement.textContent = message;
-            errorElement.style.display = 'block';
-        }
+function updateServices() {
+    const category = document.getElementById("category").value;
+    const serviceSelect = document.getElementById("service");
 
-        function hideError(elementId) {
-            const errorElement = document.getElementById(elementId);
-            errorElement.style.display = 'none';
-        }
+    serviceSelect.innerHTML = "";
 
-        function validateUsername() {
+    let services = [];
+    if (category === "hombre") {
+        services = ["Corte de cabello", "Rasurado tradicional", "Mascarilla negra carbón activado"];
+    } else if (category === "mujer") {
+        services = [
+            "Corte de cabello en capas",
+            "Corte recto",
+            "Corte degrafilado",
+            "Corte bob",
+            "Depilación con hilo (cejas, rostro)",
+            "Depilación con cera (axilas, piernas, brazos, rostro, bikini)",
+            "Diseño de ceja",
+            "Depilación con cera (ceja y bozo)",
+            "Pestañas clásicas",
+            "Pestañas efecto rímel",
+            "Retiro de extensiones",
+            "Lifting de pestañas",
+            "Tinte completo",
+            "Balayage",
+            "Mechas 3D",
+            "Babylights",
+            "Peinado con ondas sueltas",
+            "Recogidos para eventos",
+            "Planchado exprés",
+            "Peinado de novia y quinceañera",
+            "Maquillaje social (de día o de noche)",
+            "Maquillaje para eventos (bodas y XV años)",
+            "Maquillaje con aerógrafo",
+            "Maquillaje artístico o fantasía",
+            "Uñas esculturales",
+            "Nail art (diseños personalizados, pedrería, efecto cromo)",
+            "Uñas encapsuladas",
+            "Gelish",
+            "Manicure tradicional",
+            "Manicure spa",
+            "Pedicure básico",
+            "Pedicure spa (hidratación profunda)"
+        ];
+    } else if (category === "niños") {
+        services = [
+            "Corte de cabello infantil", 
+            "Peinados y trenzas tematicas", 
+            "Manicura y pedicura infantil", 
+            "Maquillaje Infantil", 
+            "Tatuajes temporales y glitter", 
+            "Spa infantil"
+        ];
+    }
+
+    if (services.length > 0) {
+        services.forEach(service => {
+            let option = document.createElement("option");
+            option.value = service.toLowerCase().replace(/\s+/g, "-"); 
+            option.textContent = service;
+            serviceSelect.appendChild(option);
+        });
+    } else {
+        let option = document.createElement("option");
+        option.value = "";
+        option.textContent = "Selecciona una categoría primero";
+        serviceSelect.appendChild(option);
+    }
+    
+    if (categoryInteracted) validateCategory();
+    if (serviceInteracted) validateService();
+    checkFormValidity();
+}
+
+const form = document.getElementById('form-agendarCita');
+const usernameInput = document.getElementById('username');
+const emailInput = document.getElementById('email');
+const datetimeInput = document.getElementById('datetime');
+const categorySelect = document.getElementById('category');
+const serviceSelect = document.getElementById('service');
+const submitBtn = document.getElementById('submit-btn');
+const confirmationModal = document.getElementById('confirmation-modal');
+const okButton = document.getElementById('ok-button');
+const appointmentDetails = document.getElementById('appointment-details');
+
+const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]+$/;
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function showError(elementId, message) {
+    const errorElement = document.getElementById(elementId);
+    errorElement.textContent = message;
+    errorElement.style.display = 'block';
+}
+
+function hideError(elementId) {
+    const errorElement = document.getElementById(elementId);
+    errorElement.style.display = 'none';
+}
+
+function validateUsername() {
     const value = usernameInput.value.trim();
     if (!usernameInteracted) return false;
     
@@ -139,239 +211,251 @@ let usernameInteracted = false;
     }
 }
 
-            function validateEmail() {
-                const value = emailInput.value.trim();
-                if (!emailInteracted) return false;
-                
-                if (value === '') {
-                    emailInput.classList.remove('valid');
-                    emailInput.classList.add('invalid');
-                    showError('email-error', 'El correo electrónico es requerido');
-                    return false;
-                } else if (!emailRegex.test(value)) {
-                    emailInput.classList.remove('valid');
-                    emailInput.classList.add('invalid');
-                    showError('email-error', 'Ingresa un correo electrónico válido');
-                    return false;
-                } else {
-                    emailInput.classList.remove('invalid');
-                    emailInput.classList.add('valid');
-                    hideError('email-error');
-                    return true;
-                }
-            }
-
-            function validateDatetime() {
-        if (!datetimeInteracted) return false;
-        
-        const selectedDate = new Date(datetimeInput.value);
-        const now = new Date();
-
-        if (!datetimeInput.value) {
-            datetimeInput.classList.remove('valid');
-            datetimeInput.classList.add('invalid');
-            showError('datetime-error', 'La fecha y hora son requeridas');
-            return false;
-        }
-
-        if (selectedDate.toDateString() === now.toDateString()) {
-            datetimeInput.classList.remove('valid');
-            datetimeInput.classList.add('invalid');
-            showError('datetime-error', 'Lo sentimos, solo puedes agendar para días futuros (a partir de mañana)');
-            return false;
-        }
-
-        const minutes = selectedDate.getMinutes();
-        if (minutes !== 0 && minutes !== 30) {
-            datetimeInput.classList.remove('valid');
-            datetimeInput.classList.add('invalid');
-            showError('datetime-error', 'Las citas solo se pueden agendar en horarios completos (ej: 10:00) o medios (ej: 10:30)');
-            return false;
-        }
-        
-        const dayOfWeek = selectedDate.getDay();
-        const hours = selectedDate.getHours();
-        
-        if (dayOfWeek === 0) {
-            datetimeInput.classList.remove('valid');
-            datetimeInput.classList.add('invalid');
-            showError('datetime-error', 'No se atiende los domingos');
-            return false;
-        }
-        
-        if (dayOfWeek >= 1 && dayOfWeek <= 5) { 
-            const openingTime = 10; 
-            const closingTime = 19; 
-            
-            if (hours < openingTime || hours >= closingTime || 
-            (hours === closingTime && minutes > 0)) {
-                datetimeInput.classList.remove('valid');
-                datetimeInput.classList.add('invalid');
-                showError('datetime-error', 'Horario de atención: Lunes a Viernes de 10:00 am a 7:00 pm');
-                return false;
-            }
-        } else if (dayOfWeek === 6) { 
-            const openingTime = 10; 
-            const closingTime = 16; 
-            
-            if (hours < openingTime || hours >= closingTime || 
-            (hours === closingTime && minutes > 0)) {
-                datetimeInput.classList.remove('valid');
-                datetimeInput.classList.add('invalid');
-                showError('datetime-error', 'Horario de atención: Sábados de 10:00 am a 4:00 pm');
-                return false;
-            }
-        }
-        
-        datetimeInput.classList.remove('invalid');
-        datetimeInput.classList.add('valid');
-        hideError('datetime-error');
+function validateEmail() {
+    const value = emailInput.value.trim();
+    if (!emailInteracted) return false;
+    
+    if (value === '') {
+        emailInput.classList.remove('valid');
+        emailInput.classList.add('invalid');
+        showError('email-error', 'El correo electrónico es requerido');
+        return false;
+    } else if (!emailRegex.test(value)) {
+        emailInput.classList.remove('valid');
+        emailInput.classList.add('invalid');
+        showError('email-error', 'Ingresa un correo electrónico válido');
+        return false;
+    } else {
+        emailInput.classList.remove('invalid');
+        emailInput.classList.add('valid');
+        hideError('email-error');
         return true;
     }
+}
 
-        function validateCategory() {
-            if (!categoryInteracted) return false;
-            
-            if (!categorySelect.value) {
-                categorySelect.classList.remove('valid');
-                categorySelect.classList.add('invalid');
-                showError('category-error', 'Debes seleccionar una categoría');
-                return false;
-            } else {
-                categorySelect.classList.remove('invalid');
-                categorySelect.classList.add('valid');
-                hideError('category-error');
-                return true;
-            }
+function validateDatetime() {
+    if (!datetimeInteracted) return false;
+    
+    const selectedDate = new Date(datetimeInput.value);
+    const now = new Date();
+
+    if (!datetimeInput.value) {
+        datetimeInput.classList.remove('valid');
+        datetimeInput.classList.add('invalid');
+        showError('datetime-error', 'La fecha y hora son requeridas');
+        return false;
+    }
+
+    if (selectedDate.toDateString() === now.toDateString()) {
+        datetimeInput.classList.remove('valid');
+        datetimeInput.classList.add('invalid');
+        showError('datetime-error', 'Lo sentimos, solo puedes agendar para días futuros (a partir de mañana)');
+        return false;
+    }
+
+    const minutes = selectedDate.getMinutes();
+    if (minutes !== 0 && minutes !== 30) {
+        datetimeInput.classList.remove('valid');
+        datetimeInput.classList.add('invalid');
+        showError('datetime-error', 'Las citas solo se pueden agendar en horarios completos (ej: 10:00) o medios (ej: 10:30)');
+        return false;
+    }
+    
+    const dayOfWeek = selectedDate.getDay();
+    const hours = selectedDate.getHours();
+    
+    if (dayOfWeek === 0) {
+        datetimeInput.classList.remove('valid');
+        datetimeInput.classList.add('invalid');
+        showError('datetime-error', 'No se atiende los domingos');
+        return false;
+    }
+    
+    if (dayOfWeek >= 1 && dayOfWeek <= 5) { 
+        const openingTime = 10; 
+        const closingTime = 19; 
+        
+        if (hours < openingTime || hours >= closingTime || 
+        (hours === closingTime && minutes > 0)) {
+            datetimeInput.classList.remove('valid');
+            datetimeInput.classList.add('invalid');
+            showError('datetime-error', 'Horario de atención: Lunes a Viernes de 10:00 am a 7:00 pm');
+            return false;
         }
-
-        function validateService() {
-            if (!serviceInteracted) return false;
-            
-            if (!serviceSelect.value) {
-                serviceSelect.classList.remove('valid');
-                serviceSelect.classList.add('invalid');
-                showError('service-error', 'Debes seleccionar un servicio');
-                return false;
-            } else {
-                serviceSelect.classList.remove('invalid');
-                serviceSelect.classList.add('valid');
-                hideError('service-error');
-                return true;
-            }
+    } else if (dayOfWeek === 6) { 
+        const openingTime = 10; 
+        const closingTime = 16; 
+        
+        if (hours < openingTime || hours >= closingTime || 
+        (hours === closingTime && minutes > 0)) {
+            datetimeInput.classList.remove('valid');
+            datetimeInput.classList.add('invalid');
+            showError('datetime-error', 'Horario de atención: Sábados de 10:00 am a 4:00 pm');
+            return false;
         }
+    }
+    
+    datetimeInput.classList.remove('invalid');
+    datetimeInput.classList.add('valid');
+    hideError('datetime-error');
+    return true;
+}
 
-        function checkFormValidity() {
-            const isUsernameValid = usernameInteracted ? validateUsername() : false;
-            const isEmailValid = emailInteracted ? validateEmail() : false;
-            const isDatetimeValid = datetimeInteracted ? validateDatetime() : false;
-            const isCategoryValid = categoryInteracted ? validateCategory() : false;
-            const isServiceValid = serviceInteracted ? validateService() : false;
-            
-            const isFormValid = isUsernameValid && 
-                               isEmailValid && 
-                               isDatetimeValid && 
-                               isCategoryValid && 
-                               isServiceValid;
-            
-            submitBtn.disabled = !isFormValid;
-            return isFormValid;
-        }
+function validateCategory() {
+    if (!categoryInteracted) return false;
+    
+    if (!categorySelect.value) {
+        categorySelect.classList.remove('valid');
+        categorySelect.classList.add('invalid');
+        showError('category-error', 'Debes seleccionar una categoría');
+        return false;
+    } else {
+        categorySelect.classList.remove('invalid');
+        categorySelect.classList.add('valid');
+        hideError('category-error');
+        return true;
+    }
+}
 
-        function formatDateTime(datetimeStr) {
-            const date = new Date(datetimeStr);
-            const day = date.getDate().toString().padStart(2, '0');
-            const month = (date.getMonth() + 1).toString().padStart(2, '0');
-            const year = date.getFullYear();
-            const hours = date.getHours().toString().padStart(2, '0');
-            const minutes = date.getMinutes().toString().padStart(2, '0');
-            
-            return `${day}/${month}/${year} a las ${hours}:${minutes}`;
-        }
+function validateService() {
+    if (!serviceInteracted) return false;
+    
+    if (!serviceSelect.value) {
+        serviceSelect.classList.remove('valid');
+        serviceSelect.classList.add('invalid');
+        showError('service-error', 'Debes seleccionar un servicio');
+        return false;
+    } else {
+        serviceSelect.classList.remove('invalid');
+        serviceSelect.classList.add('valid');
+        hideError('service-error');
+        return true;
+    }
+}
 
-        function showConfirmationModal(userData) {
-            const serviceText = document.querySelector(`#service option[value="${userData.servicio}"]`).textContent;
-            const pCorreo = document.querySelector("#p-correo")
-            const em = document.querySelector("#email")
-            const gmailButton = document.querySelector("#gmail-button");
+function checkFormValidity() {
+    const isUsernameValid = usernameInteracted ? validateUsername() : false;
+    const isEmailValid = emailInteracted ? validateEmail() : false;
+    const isDatetimeValid = datetimeInteracted ? validateDatetime() : false;
+    const isCategoryValid = categoryInteracted ? validateCategory() : false;
+    const isServiceValid = serviceInteracted ? validateService() : false;
+    
+    const isFormValid = isUsernameValid && 
+                       isEmailValid && 
+                       isDatetimeValid && 
+                       isCategoryValid && 
+                       isServiceValid;
+    
+    submitBtn.disabled = !isFormValid;
+    return isFormValid;
+}
 
-            gmailButton.addEventListener("click", () => {
-                window.location.href = "https://mail.google.com/";
-            });
+function formatDateTime(datetimeStr) {
+    const date = new Date(datetimeStr);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    const hours = date.getHours().toString().padStart(2, '0');
+    const minutes = date.getMinutes().toString().padStart(2, '0');
+    
+    return `${day}/${month}/${year} a las ${hours}:${minutes}`;
+}
 
-            let categoryText = "";
-            if (userData.categoria === "hombre") categoryText = "Hombre";
-            else if (userData.categoria === "mujer") categoryText = "Mujer";
-            else if (userData.categoria === "niños") categoryText = "Niñ@s";
-            
-            const formattedDate = formatDateTime(userData.fechaHora);
-            appointmentDetails.innerHTML = `
-                <strong>Nombre:</strong> ${userData.nombreCompleto}<br>
-                <strong>Fecha:</strong> ${formattedDate}<br>
-                <strong>Categoría:</strong> ${categoryText}<br>
-                <strong>Servicio:</strong> ${serviceText}
-            `;
+function showConfirmationModal(userData) {
+    const serviceText = document.querySelector(`#service option[value="${userData.servicio}"]`).textContent;
+    const pCorreo = document.querySelector("#p-correo")
+    const em = document.querySelector("#email")
+    const gmailButton = document.querySelector("#gmail-button");
 
-            pCorreo.textContent = em.value
-            
-            confirmationModal.style.display = "flex";
-            
-            form.style.display = "none";
-        }
+    gmailButton.addEventListener("click", () => {
+        window.location.href = "https://mail.google.com/";
+    });
 
-        usernameInput.addEventListener('input', () => {
-            if (!usernameInteracted) usernameInteracted = true;
-            validateUsername();
-            checkFormValidity();
-        });
+    let categoryText = "";
+    if (userData.categoria === "hombre") categoryText = "Hombre";
+    else if (userData.categoria === "mujer") categoryText = "Mujer";
+    else if (userData.categoria === "niños") categoryText = "Niñ@s";
+    
+    const formattedDate = formatDateTime(userData.fechaHora);
+    appointmentDetails.innerHTML = `
+        <strong>Nombre:</strong> ${userData.nombreCompleto}<br>
+        <strong>Fecha:</strong> ${formattedDate}<br>
+        <strong>Categoría:</strong> ${categoryText}<br>
+        <strong>Servicio:</strong> ${serviceText}
+    `;
 
-        usernameInput.addEventListener('blur', () => {
-            usernameInteracted = true;
-            validateUsername();
-            checkFormValidity();
-        });
+    pCorreo.textContent = em.value
+    
+    confirmationModal.style.display = "flex";
+    
+    form.style.display = "none";
+    
+    // Limpiar el localStorage después de agendar exitosamente
+    clearFormData();
+}
 
-        emailInput.addEventListener('input', () => {
-            if (!emailInteracted) emailInteracted = true;
-            validateEmail();
-            checkFormValidity();
-        });
+// Event listeners con guardado de datos
+usernameInput.addEventListener('input', () => {
+    if (!usernameInteracted) usernameInteracted = true;
+    validateUsername();
+    checkFormValidity();
+    saveFormData();
+});
 
-        emailInput.addEventListener('blur', () => {
-            emailInteracted = true;
-            validateEmail();
-            checkFormValidity();
-        });
+usernameInput.addEventListener('blur', () => {
+    usernameInteracted = true;
+    validateUsername();
+    checkFormValidity();
+    saveFormData();
+});
 
-        datetimeInput.addEventListener('change', () => {
-            if (!datetimeInteracted) datetimeInteracted = true;
-            validateDatetime();
-            checkFormValidity();
-        });
+emailInput.addEventListener('input', () => {
+    if (!emailInteracted) emailInteracted = true;
+    validateEmail();
+    checkFormValidity();
+    saveFormData();
+});
 
-        datetimeInput.addEventListener('blur', () => {
-            datetimeInteracted = true;
-            validateDatetime();
-            checkFormValidity();
-        });
+emailInput.addEventListener('blur', () => {
+    emailInteracted = true;
+    validateEmail();
+    checkFormValidity();
+    saveFormData();
+});
 
-        categorySelect.addEventListener('change', () => {
-            if (!categoryInteracted) categoryInteracted = true;
-            validateCategory();
-            checkFormValidity();
-        });
+datetimeInput.addEventListener('change', () => {
+    if (!datetimeInteracted) datetimeInteracted = true;
+    validateDatetime();
+    checkFormValidity();
+    saveFormData();
+});
 
-        serviceSelect.addEventListener('change', () => {
-            if (!serviceInteracted) serviceInteracted = true;
-            validateService();
-            checkFormValidity();
-        });
+datetimeInput.addEventListener('blur', () => {
+    datetimeInteracted = true;
+    validateDatetime();
+    checkFormValidity();
+    saveFormData();
+});
 
-        okButton.addEventListener('click', () => {
-            window.location.href = 'http://localhost:4000/HTML/index.html';
-        });
+categorySelect.addEventListener('change', () => {
+    if (!categoryInteracted) categoryInteracted = true;
+    validateCategory();
+    checkFormValidity();
+    saveFormData();
+});
 
-        form.addEventListener('submit', async function(event) {
+serviceSelect.addEventListener('change', () => {
+    if (!serviceInteracted) serviceInteracted = true;
+    validateService();
+    checkFormValidity();
+    saveFormData();
+});
+
+okButton.addEventListener('click', () => {
+    window.location.href = 'http://localhost:4000/HTML/index.html';
+});
+
+form.addEventListener('submit', async function(event) {
     event.preventDefault();
     
     usernameInteracted = true;

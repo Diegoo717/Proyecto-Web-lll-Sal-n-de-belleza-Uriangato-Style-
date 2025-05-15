@@ -43,6 +43,7 @@ function configurarEventos() {
 
     const article8 = document.querySelector("#art-div-section-1-admin");
     const article9 = document.querySelector("#art-div-section-2-admin");
+    const article10 = document.querySelector("#art-div-section-3-admin");
 
     article8.addEventListener("click", () => {
         window.location.href = "/HTML/gestionarCitas.html";
@@ -50,6 +51,10 @@ function configurarEventos() {
     
     article9.addEventListener("click", () => {
         window.location.href = "/HTML/confServicios.html";
+    });
+
+    article10.addEventListener("click", () => {
+        window.location.href = "/HTML/reportes.html";
     });
 }
 

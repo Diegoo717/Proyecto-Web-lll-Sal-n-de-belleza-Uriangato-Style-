@@ -441,6 +441,9 @@ body{
 }
 
 @media (max-width: 768px) {
+    .body-Administracion {
+    overflow-y: auto;
+    }
     #contenedorPrincipal-administracion {
         flex-direction: column;
         padding: 10px;
@@ -463,6 +466,9 @@ body{
 }
 
 @media (max-width: 480px) {
+    .body-Administracion {
+    overflow-y: auto;
+    }
     .art-section-main-administracion {
         height: 250px;
     }

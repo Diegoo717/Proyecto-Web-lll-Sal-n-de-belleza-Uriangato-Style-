@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reportes de Citas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="stylesheet" href="../CSS/reportes.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body class="body-reportes">
+    <header id="encabezado-reportes" class="encabezado-seccion">
+        <a href="http://localhost:4000/HTML/administracion.html" class="btn-regresar">
+            <i class="fas fa-chevron-left"></i>
+            <span>Volver al panel</span>
+        </a>
+        <h1 class="titulo-principal">Reportes de Citas</h1>
+    </header>
+
+    <main id="contenedorPrincipal-reportes" class="contenedor-principal">
+        <!-- Filtros -->
+        <section class="filtros-reportes">
+            <div class="filtro-item">
+                <label for="fechaInicio" class="label-filtro texto-general">Fecha Inicio:</label>
+                <input type="date" id="fechaInicio" class="input-filtro">
+            </div>
+            <div class="filtro-item">
+                <label for="fechaFin" class="label-filtro texto-general">Fecha Fin:</label>
+                <input type="date" id="fechaFin" class="input-filtro">
+            </div>
+            <div class="filtro-item">
+                <label for="categoriaFiltro" class="label-filtro texto-general">Categoría:</label>
+                <select id="categoriaFiltro" class="select-filtro">
+                    <option value="">Todas</option>
+                    <option value="Hombre">Hombre</option>
+                    <option value="Mujer">Mujer</option>
+                    <option value="Niños">Niños</option>
+                </select>
+            </div>
+            <button id="btnAplicarFiltros" class="btn-filtro texto-general">Aplicar Filtros</button>
+            <button id="btnResetFiltros" class="btn-filtro btn-secundario texto-general">Restablecer</button>
+        </section>
+
+        <!-- Resumen Estadístico -->
+        <section class="resumen-estadistico">
+            <div class="tarjeta-estadistica">
+                <h3 class="titulo-tarjeta texto-general">Total Citas</h3>
+                <p id="totalCitas" class="valor-tarjeta texto-general">0</p>
+            </div>
+            <div class="tarjeta-estadistica">
+                <h3 class="titulo-tarjeta texto-general">Citas Hoy</h3>
+                <p id="citasHoy" class="valor-tarjeta texto-general">0</p>
+            </div>
+            <div class="tarjeta-estadistica">
+                <h3 class="titulo-tarjeta texto-general">Categoría Más Popular</h3>
+                <p id="categoriaPopular" class="valor-tarjeta texto-general">-</p>
+            </div>
+            <div class="tarjeta-estadistica">
+                <h3 class="titulo-tarjeta texto-general">Servicio Más Solicitado</h3>
+                <p id="servicioPopular" class="valor-tarjeta texto-general">-</p>
+            </div>
+        </section>
+
+        <!-- Gráficos -->
+        <section class="contenedor-graficos">
+            <div class="grafico-container">
+                <h2 class="titulo-grafico texto-general">Citas por Categoría</h2>
+                <canvas id="graficoCategorias"></canvas>
+            </div>
+            <div class="grafico-container">
+                <h2 class="titulo-grafico texto-general">Citas por Mes</h2>
+                <canvas id="graficoMensual"></canvas>
+            </div>
+            <div class="grafico-container grafico-full">
+                <h2 class="titulo-grafico texto-general">Servicios Más Populares</h2>
+                <canvas id="graficoServicios"></canvas>
+            </div>
+            <div class="grafico-container">
+                <h2 class="titulo-grafico texto-general">Distribución por Día de la Semana</h2>
+                <canvas id="graficoDiasSemana"></canvas>
+            </div>
+            <div class="grafico-container">
+                <h2 class="titulo-grafico texto-general">Horarios Más Solicitados</h2>
+                <canvas id="graficoHorarios"></canvas>
+            </div>
+        </section>
+
+        <!-- Tabla de resumen -->
+        <section class="tabla-resumen">
+            <h2 class="titulo-seccion texto-general">Resumen Detallado</h2>
+            <div class="contenedor-tabla">
+                <table id="tablaResumen" class="tabla-datos texto-general">
+                    <thead>
+                        <tr>
+                            <th>Categoría</th>
+                            <th>Servicio</th>
+                            <th>Total Citas</th>
+                            <th>Ingresos Estimados</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cuerpoTablaResumen">
+                        <!-- Datos se llenarán con JS -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Exportar Reportes -->
+        <section class="exportar-reportes">
+            <h2 class="titulo-seccion texto-general">Exportar Reportes</h2>
+            <div class="botones-exportar">
+                <button id="btnExportarPDF" class="btn-exportar texto-general">
+                    <i class="fas fa-file-pdf"></i> Exportar a PDF
+                </button>
+                <button id="btnExportarExcel" class="btn-exportar texto-general">
+                    <i class="fas fa-file-excel"></i> Exportar a Excel
+                </button>
+                <button id="btnImprimir" class="btn-exportar texto-general">
+                    <i class="fas fa-print"></i> Imprimir Reporte
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <script src="../JS/admin/gestCitas/reportes.js"></script>
+</body>
+</html>

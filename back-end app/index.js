@@ -19,9 +19,9 @@ app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, '../frontend-app')));
 
 app.use('/', citasRoutes); 
-app.use('/servHombre', authMiddleware.verifyToken, servHombreRoutes);
-app.use('/servMujer', authMiddleware.verifyToken, servMujerRoutes);
-app.use('/servNino', authMiddleware.verifyToken, servNiñosRoutes);
+app.use('/servHombre', servHombreRoutes);
+app.use('/servMujer', servMujerRoutes);
+app.use('/servNino', servNiñosRoutes);
 app.use('/admin', authAdmin);
 
 const PORT = process.env.PORT || 4000;

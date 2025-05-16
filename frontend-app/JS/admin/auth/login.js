@@ -28,8 +28,7 @@ document.getElementById('login-form').addEventListener('submit', async function(
         }
 
         localStorage.setItem('adminToken', data.token);
-
-        window.location.href = 'http://localhost:4000/HTML/administracion.html';
+        window.location.href = 'administracion.html';
         
     } catch (error) {
         console.error('Error:', error);
@@ -37,9 +36,25 @@ document.getElementById('login-form').addEventListener('submit', async function(
     }
 });
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     const token = localStorage.getItem('adminToken');
+    
     if (token) {
-        window.location.href = 'http://localhost:4000/HTML/administracion.html';
+        try {
+            const response = await fetch('http://localhost:4000/admin/verify-token', {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
+            
+            if (response.ok) {
+                window.location.href = 'administracion.html';
+            } else {
+                localStorage.removeItem('adminToken');
+            }
+        } catch (error) {
+            console.error('Error verificando token:', error);
+            localStorage.removeItem('adminToken');
+        }
     }
 });

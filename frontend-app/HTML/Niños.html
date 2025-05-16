@@ -5,13 +5,231 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Servicios para Niños</title>
     <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../CSS/stylesN.css">
+    <style>
+        /* ESTILOS GENERALES */
+        body {
+            font-family: 'Titan One', sans-serif;
+            background-color: #FBF4EB;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+
+        /* ENCABEZADO Y NAVEGACIÓN (conservando tu estilo original) */
+        #encabezado-servicios-niños {
+            margin: 0;
+            background-color: #EE845D;
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 25px;
+            -webkit-text-stroke: 1px black;
+            border-bottom: 3px solid #C76B48;
+            padding-bottom: 10px;
+        }
+
+        #nav-servicios-niños {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            font-size: 20px;
+        }
+
+        #nav-servicios-niños a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            -webkit-text-stroke: 1px #B45636;
+            transition: color 0.3s ease, transform 0.3s ease;
+            position: relative;
+        }
+
+        #nav-servicios-niños a::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: #B45636;
+            left: 0;
+            bottom: -3px;
+            transform: scaleX(0);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        #nav-servicios-niños a:hover {
+            color: #FBEADB;
+            -webkit-text-stroke: 1px #A0492F;
+            transform: scale(1.08);
+        }
+
+        #nav-servicios-niños a:hover::after {
+            transform: scaleX(1);
+        }
+
+        @media (max-width: 768px) {
+            #nav-servicios-niños {
+                width: 100%;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+            }
+            #nav-servicios-niños a {
+                margin-top: 5px;
+            }
+        }
+
+        /* CONTENEDOR PRINCIPAL Y CARDS (estilo similar a otros módulos) */
+        #contenedorPrincipal-niños {
+            background-color: #FBF4EB;
+            min-height: calc(100vh - 150px);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            padding: 40px 20px;
+            gap: 30px;
+        }
+
+        .seccion-servicio-niño {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            flex-direction: column;
+            text-align: center;
+            width: 320px;
+            background-color: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid #e0d5c8;
+        }
+
+        .seccion-servicio-niño:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .articleSN {
+            width: 280px;
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            overflow: hidden;
+            border: none;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            background-color: #f8f4f0;
+        }
+
+        .articleSN img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .articleSN:hover img {
+            transform: scale(1.05);
+        }
+
+        .seccion-servicio-niño h3 {
+            margin: 15px 0 10px;
+            color: #EE845D; /* Color naranja específico para niños */
+            font-size: 22px;
+            width: 100%;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .seccion-servicio-niño p {
+            margin: 8px 0;
+            text-align: center;
+            font-size: 18px;
+            font-family: 'Trirong', serif !important; 
+            line-height: 1.5;
+            color: black;
+            width: 100%;
+        }
+
+        .seccion-servicio-niño .precio {
+            font-weight: bold;
+            color: #C76B48; /* Color naranja más oscuro para precios */
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        /* Mensajes de carga y error */
+        .loading-message, .error-message {
+            width: 100%;
+            text-align: center;
+            padding: 40px;
+            font-size: 18px;
+            color: #EE845D;
+        }
+
+        .error-mensaje {
+            color: #d32f2f;
+            margin-bottom: 20px;
+        }
+
+        .btn-reintentar {
+            background-color: #EE845D;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Titan One', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        .btn-reintentar:hover {
+            background-color: #C76B48;
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            #contenedorPrincipal-niños {
+                padding: 20px 10px;
+                gap: 20px;
+            }
+            
+            .seccion-servicio-niño {
+                width: 90%;
+                max-width: 350px;
+            }
+            
+            .articleSN {
+                width: 100%;
+                height: 250px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .seccion-servicio-niño h3 {
+                font-size: 20px;
+            }
+            
+            .seccion-servicio-niño p {
+                font-size: 15px;
+            }
+            
+            .articleSN {
+                height: 220px;
+            }
+        }
+    </style>
 </head>
-<body>
+<body class="bodyServiciosNiños">
     <header id="encabezado-servicios-niños">
         <h4>SERVICIOS PARA NIÑOS/AS</h4>
         <nav id="nav-servicios-niños">
-
             <a href="index.html">Inicio</a>
             <a href="agendarCita.html">Agendar Cita</a>
             <a href="serviciosMujer.html">Mujer</a>
@@ -19,47 +237,126 @@
             <a href="Blog.html">Blog</a>
             <a href="Galeria.html">Galería</a>
             <a href="contacto.html">Contacto</a>
-
         </nav>
     </header>
-   
-        <div class="contenedor">
-            <div class="servicioN">
-                <img src="../Resources/Imagenes/corte.jpg" alt="Corte de cabello">
-                <h3>Corte de cabello infantil</h3>
-                <p>$50</p>
-                <p>Descripción</p>
-            </div>
-            <div class="servicioN">
-                <img src="../Resources/Imagenes/peinado.jpg" alt="Peinados y trenzas">
-                <h3>Peinados y trenzas temáticas</h3>
-                <p>$100</p>
-                <p>Descripción</p>
-            </div>
-            <div class="servicioN">
-                <img src="../Resources/Imagenes/manicura.jpg" alt="Manicura y pedicura">
-                <h3>Manicura y pedicura infantil</h3>
-                <p>$120</p>
-                <p>Descripción</p>
-            </div>
-            <div class="servicioN">
-                <img src="../Resources/Imagenes/Maquillaje.jpeg" alt="Maquillaje infantil">
-                <h3>Maquillaje infantil</h3>
-                <p>$80</p>
-                <p>Descripción</p>
-            </div>
-            <div class="servicioN">
-                <img src="../Resources/Imagenes/tatuajes.jpeg" alt="Tatuajes y glitter">
-                <h3>Tatuajes temporales y glitter</h3>
-                <p>$70</p>
-                <p>Descripción</p>
-            </div>
-            <div class="servicioN">
-                <img src="../Resources/Imagenes/spa.jpeg" alt="Spa infantil">
-                <h3>Spa infantil</h3>
-                <p>$100</p>
-                <p>Descripción</p>
-            </div>
-        </div>
+
+    <main id="contenedorPrincipal-niños">
+        <!-- Las secciones de servicios se generarán dinámicamente con JS -->
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const API_BASE_URL = 'http://localhost:4000';
+            const API_PREFIX = '/servNino';
+            const ENDPOINT = '/verServNinos';
+
+            const contenedorPrincipal = document.getElementById('contenedorPrincipal-niños');
+
+            async function cargarServicios() {
+                try {
+                    // Mostrar estado de carga
+                    const loadingDiv = document.createElement('div');
+                    loadingDiv.className = 'loading-message';
+                    loadingDiv.innerHTML = '<p>Cargando servicios...</p>';
+                    contenedorPrincipal.appendChild(loadingDiv);
+
+                    // Hacer la petición a la API
+                    const response = await fetch(`${API_BASE_URL}${API_PREFIX}${ENDPOINT}`);
+                    
+                    if (!response.ok) {
+                        throw new Error(`Error HTTP: ${response.status}`);
+                    }
+                    
+                    const data = await response.json();
+                    
+                    if (data.success) {
+                        loadingDiv.remove();
+                        renderizarServicios(data.data);
+                    } else {
+                        throw new Error(data.error || 'Error desconocido al cargar servicios');
+                    }
+                } catch (error) {
+                    console.error('Error al cargar servicios:', error);
+                    mostrarError('Error al cargar los servicios: ' + error.message);
+                }
+            }
+
+            function renderizarServicios(servicios) {
+                // Verificar si hay servicios
+                if (!servicios || !Array.isArray(servicios)) {
+                    throw new Error('Formato de datos inválido');
+                }
+
+                // Limpiar contenedor
+                contenedorPrincipal.innerHTML = '';
+
+                // Si no hay servicios
+                if (servicios.length === 0) {
+                    const mensaje = document.createElement('p');
+                    mensaje.textContent = 'No hay servicios disponibles en este momento';
+                    mensaje.className = 'sin-servicios';
+                    contenedorPrincipal.appendChild(mensaje);
+                    return;
+                }
+
+                // Crear elementos para cada servicio
+                servicios.forEach(servicio => {
+                    const seccion = document.createElement('section');
+                    seccion.className = 'seccion-servicio-niño';
+                    
+                    // Imagen del servicio
+                    const articulo = document.createElement('article');
+                    articulo.className = 'articleSN';
+                    
+                    const imagen = document.createElement('img');
+                    imagen.src = servicio.DirecImgServicio || '../Resources/imagenes/default-service.jpg';
+                    imagen.alt = servicio.NombreServicio;
+                    imagen.loading = 'lazy';
+                    
+                    articulo.appendChild(imagen);
+                    
+                    // Nombre del servicio
+                    const nombre = document.createElement('h3');
+                    nombre.textContent = servicio.NombreServicio;
+                    
+                    // Precio del servicio
+                    const precio = document.createElement('div');
+                    precio.className = 'precio';
+                    precio.textContent = `$${parseFloat(servicio.CostoServicio).toFixed(2)}`;
+                    
+                    // Descripción del servicio
+                    const descripcion = document.createElement('p');
+                    descripcion.textContent = servicio.DescripcionServicio;
+                    
+                    // Agregar elementos al div del servicio
+                    seccion.appendChild(articulo);
+                    seccion.appendChild(nombre);
+                    seccion.appendChild(precio);
+                    seccion.appendChild(descripcion);
+                    
+                    // Agregar servicio al contenedor principal
+                    contenedorPrincipal.appendChild(seccion);
+                });
+            }
+
+            function mostrarError(mensaje) {
+                // Eliminar mensaje de carga si existe
+                const loadingDiv = document.querySelector('.loading-message');
+                if (loadingDiv) loadingDiv.remove();
+                
+                // Crear y mostrar mensaje de error
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'error-message';
+                errorDiv.innerHTML = `
+                    <p class="error-mensaje">${mensaje}</p>
+                    <button onclick="location.reload()" class="btn-reintentar">Reintentar</button>
+                `;
+                contenedorPrincipal.appendChild(errorDiv);
+            }
+
+            // Iniciar la carga de servicios
+            cargarServicios();
+        });
+    </script>
 </body>
 </html>

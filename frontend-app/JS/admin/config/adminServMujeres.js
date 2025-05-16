@@ -87,8 +87,7 @@ function configurarEventos() {
         costoServicio.value = servicio.CostoServicio;
         imagenServicio.value = servicio.DirecImgServicio;
         descripcionServicio.value = servicio.DescripcionServicio;
-        
-        // Actualizar vista previa de imagen
+
         actualizarVistaPreviaImagen();
         
         formContainer.style.display = 'block';
@@ -152,8 +151,7 @@ function configurarEventos() {
             `;
             serviciosTableBody.appendChild(tr);
         });
-        
-        // Agregar event listeners a los botones dinámicos
+
         document.querySelectorAll('.btn-editar').forEach(btn => {
             btn.addEventListener('click', async () => {
                 const id = btn.getAttribute('data-id');

@@ -4,64 +4,562 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog del Salón de Belleza</title>
-    <link href="https://fonts.googleapis.com/css2?family=Titan+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../CSS/stylesN.css">
+    <link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* Estilos base consistentes con tu diseño */
+        :root {
+            --beige: #D2AC86;
+            --beige-dark: #ab7947;
+            --brown: #503010;
+            --light: #f9f5f0;
+            --text: #5a4a42;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text);
+            background-color: var(--light);
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        h4{
+            margin-top: 25px;
+            margin-bottom: 10px;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Titan One', cursive;
+        }
+        
+        /* Header fiel a tu diseño original */
+        #encabezado-blog {
+            margin: 0;
+            background-color: var(--beige);
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 25px;
+            -webkit-text-stroke: 1px black;
+            border-bottom: 3px solid var(--beige-dark);
+            padding-bottom: 10px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        #nav-blog {
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            font-size: 20px;
+            flex-wrap: wrap;
+        }
+        
+        #nav-blog a {
+            text-decoration: none;
+            color: var(--beige-dark);
+            -webkit-text-stroke: 1px var(--brown);
+            font-family: 'Titan One', sans-serif;
+            position: relative;
+            padding: 5px 0;
+            margin: 0 10px;
+        }
+        
+        #nav-blog a::after {
+            content: "";
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background-color: var(--brown);
+            left: 0;
+            bottom: -3px;
+            transform: scaleX(0);
+            transition: transform 0.3s ease-in-out;
+        }
+        
+        #nav-blog a:hover {
+            color: #d49b67;
+            -webkit-text-stroke: 1px #7a4f2e; 
+            transform: scale(1.08); 
+        }
+        
+        #nav-blog a:hover::after {
+            transform: scaleX(1); 
+        }
+        
+        /* Hero section mejorada */
+        .blog-hero {
+            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+        }
+        
+        .hero-content h2 {
+            font-family: 'Titan One', cursive;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            -webkit-text-stroke: 1px var(--beige-dark);
+            color: white;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 2rem;
+            background-color: rgba(210, 172, 134, 0.7);
+            padding: 10px 20px;
+            border-radius: 20px;
+        }
+        
+        /* Contenedor principal */
+        .blog-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 20px;
+        }
+        
+        /* Artículos mejorados */
+        .article-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .article-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+        
+        .article-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .article-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .article-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .article-card:hover .article-image img {
+            transform: scale(1.1);
+        }
+        
+        .article-content {
+            padding: 1.5rem;
+        }
+        
+        .article-date {
+            color: var(--beige-dark);
+            font-weight: 600;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .article-title {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--brown);
+            -webkit-text-stroke: 0.5px var(--brown);
+        }
+        
+        .article-excerpt {
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Sección de consejos */
+        .tips-section {
+            background-color: var(--beige);
+            padding: 3rem 0;
+            margin: 4rem 0;
+            text-align: center;
+        }
+        
+        .tips-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .tips-title {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+            color: white;
+            -webkit-text-stroke: 1px var(--brown);
+        }
+        
+        .tips-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .tip-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .tip-card h3 {
+            color: var(--beige-dark);
+            margin-bottom: 1rem;
+        }
+        
+        /* Newsletter */
+        .newsletter-section {
+            background-color: var(--brown);
+            padding: 3rem 20px;
+            text-align: center;
+            color: white;
+        }
+        
+        .newsletter-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            -webkit-text-stroke: 1px var(--beige-dark);
+        }
+        
+        .newsletter-form {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 30px 0 0 30px;
+            font-family: inherit;
+        }
+        
+        .newsletter-btn {
+            background-color: var(--beige-dark);
+            color: white;
+            border: none;
+            padding: 0 1.5rem;
+            border-radius: 0 30px 30px 0;
+            font-family: 'Titan One', sans-serif;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .newsletter-btn:hover {
+            background-color: #c08d5a;
+        }
+        
+        /* Footer */
+        .blog-footer {
+            background-color: var(--brown);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+            font-size: 1rem;
+        }
+        
+        .social-links {
+            margin: 1rem 0;
+        }
+        
+        .social-links a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            #nav-blog {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            #nav-blog a {
+                margin: 5px 0;
+            }
+            
+            .hero-content h2 {
+                font-size: 2rem;
+            }
+            
+            .newsletter-form {
+                flex-direction: column;
+            }
+            
+            .newsletter-input {
+                border-radius: 30px;
+                margin-bottom: 10px;
+            }
+            
+            .newsletter-btn {
+                border-radius: 30px;
+                padding: 12px;
+            }
+        }
+        
+        /* Efectos de mostrar/ocultar contenido */
+        .article-full {
+            display: none;
+            padding-top: 1rem;
+            border-top: 1px dashed var(--beige-dark);
+            margin-top: 1rem;
+        }
+        
+        .article-full.show {
+            display: block;
+        }
+        
+        .toggle-btn {
+            background-color: var(--beige-dark);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            display: inline-flex;
+            align-items: center;
+        }
+        
+        .toggle-btn i {
+            margin-left: 5px;
+            transition: transform 0.3s;
+        }
+        
+        .toggle-btn:hover {
+            background-color: var(--brown);
+        }
+        
+        .toggle-btn.active i {
+            transform: rotate(180deg);
+        }
+    </style>
 </head>
 <body>
+    <!-- Header fiel a tu diseño original -->
     <header id="encabezado-blog">
         <h4>BLOG</h4>
         <nav id="nav-blog">
-
             <a href="index.html">Inicio</a>
             <a href="agendarCita.html">Agendar Cita</a>
             <a href="serviciosMujer.html">Mujer</a>
             <a href="Niños.html">Niños/Niñas</a>
             <a href="Galeria.html">Galería</a>
             <a href="contacto.html">Contacto</a>
-
         </nav>
     </header>
 
-    <main>
-        <article>
-            <h2>5 Consejos para Mantener tu Cabello Saludable</h2>
-            <p><em>Fecha: 01/03/2025</em></p>
-            <p>
-                Mantener un cabello fuerte y brillante requiere cuidados diarios. Te compartimos cinco consejos 
-                esenciales para que tu melena luzca increíble todos los días.
-            </p>
-            <a href="articulo1.html">Leer más</a>
+    <!-- Hero section -->
+    <section class="blog-hero">
+        <div class="hero-content">
+            <h2>Descubre Nuestros Secretos de Belleza</h2>
+            <p>Consejos profesionales, tendencias y técnicas exclusivas de nuestro salón</p>
+        </div>
+    </section>
+
+    <!-- Contenido principal del blog -->
+    <main class="blog-container">
+        <!-- Artículo destacado -->
+        <article class="article-card featured-article">
+            <div class="article-image">
+                <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Tendencias en peinados">
+            </div>
+            <div class="article-content">
+                <span class="article-date"><i class="far fa-calendar-alt"></i> 15/02/2025</span>
+                <h2 class="article-title">Las Últimas Tendencias en Peinados para 2025</h2>
+                <p class="article-excerpt">Desde ondas naturales hasta cortes modernos, descubre los peinados más populares para este año y cómo puedes adaptarlos a tu estilo personal.</p>
+                
+                <div class="article-full">
+                    <h3>Ondas Naturales y Texturizadas</h3>
+                    <p>Este año se imponen los looks que imitan el movimiento natural del cabello. Nuestros estilistas recomiendan:</p>
+                    <ul>
+                        <li>Uso de difusor para realzar rizos naturales</li>
+                        <li>Productos texturizadores para crear volumen</li>
+                        <li>Técnicas de corte en capas para facilitar el styling</li>
+                    </ul>
+                    
+                    <h3>Cortes Atrevidos</h3>
+                    <p>Los cortes geométricos y asimétricos ganan terreno:</p>
+                    <ul>
+                        <li>Bob corto con líneas definidas</li>
+                        <li>Capas anguladas para rostros ovalados</li>
+                        <li>Flequillos pronunciados que enmarcan el rostro</li>
+                    </ul>
+                    
+                    <h3>Accesorios Decorativos</h3>
+                    <p>Los complementos para el cabello son tendencia:</p>
+                    <ul>
+                        <li>Pinzas metálicas para recogidos informales</li>
+                        <li>Cintas de seda para looks retro</li>
+                        <li>Redecillas con detalles perlados para eventos</li>
+                    </ul>
+                </div>
+                
+                <button class="toggle-btn">Leer más <i class="fas fa-chevron-down"></i></button>
+            </div>
         </article>
 
-        <article>
-            <h2>Las Últimas Tendencias en Peinados para 2025</h2>
-            <p><em>Fecha: 15/02/2025</em></p>
-            <p>
-                Desde ondas naturales hasta cortes modernos, descubre los peinados más populares para este año 
-                y cómo puedes adaptarlos a tu estilo personal.
-            </p>
-            <a href="articulo2.html">Leer más</a>
-        </article>
+        <!-- Grid de artículos -->
+        <div class="article-grid">
+            <!-- Artículo 1 -->
+            <article class="article-card">
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Cabello saludable">
+                </div>
+                <div class="article-content">
+                    <span class="article-date"><i class="far fa-calendar-alt"></i> 01/03/2025</span>
+                    <h2 class="article-title">5 Consejos para Mantener tu Cabello Saludable</h2>
+                    <p class="article-excerpt">Mantener un cabello fuerte y brillante requiere cuidados diarios. Te compartimos cinco consejos esenciales para que tu melena luzca increíble.</p>
+                    
+                    <div class="article-full">
+                        <h3>1. Lavado Adecuado</h3>
+                        <p>Usa shampoo sin sulfatos y agua tibia. Masajea suavemente el cuero cabelludo con las yemas de los dedos, no con las uñas.</p>
+                        
+                        <h3>2. Acondicionamiento Profundo</h3>
+                        <p>Aplica acondicionador desde medios a puntas, dejando actuar 3-5 minutos. Una vez por semana usa mascarilla nutritiva.</p>
+                        
+                        <h3>3. Protección Térmica</h3>
+                        <p>Nunca uses planchas o secadores sin protector térmico. Mantén el secador a 15cm de distancia y usa temperatura media.</p>
+                        
+                        <h3>4. Corte Regular</h3>
+                        <p>Cortar las puntas cada 8-12 semanas previene el quiebre y mantiene el cabello con aspecto saludable.</p>
+                        
+                        <h3>5. Alimentación Balanceada</h3>
+                        <p>Consume proteínas, hierro, zinc y vitaminas A, C, D y E para nutrir el cabello desde dentro.</p>
+                    </div>
+                    
+                    <button class="toggle-btn">Leer más <i class="fas fa-chevron-down"></i></button>
+                </div>
+            </article>
+            
+            <!-- Artículo 2 -->
+            <article class="article-card">
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Tinte perfecto">
+                </div>
+                <div class="article-content">
+                    <span class="article-date"><i class="far fa-calendar-alt"></i> 02/02/2025</span>
+                    <h2 class="article-title">¿Cómo Elegir el Tinte Perfecto Según tu Tono de Piel?</h2>
+                    <p class="article-excerpt">Elegir el color de cabello adecuado puede resaltar tu belleza natural. Aprende a seleccionar el tinte ideal según tus características.</p>
+                    
+                    <div class="article-full">
+                        <h3>Para Pieles Cálidas</h3>
+                        <p>Tonos dorados, cobrizos, caramelo o miel. Los reflejos dorados iluminan el rostro.</p>
+                        
+                        <h3>Para Pieles Frías</h3>
+                        <p>Tonos ceniza, platino, violetas suaves y marrones fríos. Evita tonos demasiado dorados.</p>
+                        
+                        <h3>Para Pieles Neutras</h3>
+                        <p>Tienen libertad para experimentar, pero los tonos chocolate y caoba siempre son seguros.</p>
+                        
+                        <h3>Considera tus Ojos</h3>
+                        <p>Ojos claros: contrastes sutiles. Ojos oscuros: tonos profundos como ébano o con reflejos rojizos.</p>
+                        
+                        <h3>Nuestro Consejo Profesional</h3>
+                        <p>Siempre haz una prueba de mechón 48h antes y considera el mantenimiento que requiere cada color.</p>
+                    </div>
+                    
+                    <button class="toggle-btn">Leer más <i class="fas fa-chevron-down"></i></button>
+                </div>
+            </article>
+            
+            <!-- Artículo 3 -->
+            <article class="article-card">
+                <div class="article-image">
+                    <img src="https://images.unsplash.com/photo-1595476108010-b4d1f102b1b1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Tratamientos capilares">
+                </div>
+                <div class="article-content">
+                    <span class="article-date"><i class="far fa-calendar-alt"></i> 20/01/2025</span>
+                    <h2 class="article-title">Tratamientos Capilares: ¿Cuál es el Mejor para tu Tipo de Cabello?</h2>
+                    <p class="article-excerpt">Descubre los tratamientos profesionales que devolverán la vida a tu cabello según sus necesidades específicas.</p>
+                    
+                    <div class="article-full">
+                        <h3>Cabello Seco</h3>
+                        <p>Tratamientos con keratina y aceites naturales (argán, coco, macadamia) que reponen lípidos.</p>
+                        
+                        <h3>Cabello Graso</h3>
+                        <p>Limpiezas profundas con arcilla y tratamientos reguladores de sebo con extractos de té verde.</p>
+                        
+                        <h3>Cabello Teñido</h3>
+                        <p>Selladores de cutícula y tratamientos con pigmentos que refrescan el color entre tintes.</p>
+                        
+                        <h3>Cabello Fino</h3>
+                        <p>Volumizadores con proteínas de trigo y colágeno que engrosan la fibra sin pesar.</p>
+                        
+                        <h3>Cabello Encrespado</h3>
+                        <p>Alisados naturales con aminoácidos y aceite de marula que controlan el frizz hasta 8 semanas.</p>
+                    </div>
+                    
+                    <button class="toggle-btn">Leer más <i class="fas fa-chevron-down"></i></button>
+                </div>
+            </article>
+        </div>
+        
+        <!-- Sección de consejos -->
+        <section class="tips-section">
+            <div class="tips-container">
+                <h2 class="tips-title">Consejos Express de Nuestros Estilistas</h2>
+                <div class="tips-grid">
+                    <div class="tip-card">
+                        <h3>Cepillado Correcto</h3>
+                        <p>Comienza por las puntas y ve subiendo gradualmente para evitar quiebres. Usa cepillos de cerdas naturales.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h3>Protección Nocturna</h3>
+                        <p>Recoge tu cabello en una coleta suave con scrunchie de seda para evitar fricción mientras duermes.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h3>Secado Inteligente</h3>
+                        <p>Secar al 80% con difusor y dejar terminar al aire previene daños por calor excesivo.</p>
+                    </div>
+                    <div class="tip-card">
+                        <h3>Protección Solar</h3>
+                        <p>Usa productos con filtro UV. El sol deshidrata y oxida el color tanto como las herramientas de calor.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-        <article>
-            <h2>¿Cómo Elegir el Tinte Perfecto Según tu Tono de Piel?</h2>
-            <p><em>Fecha: 02/02/2025</em></p>
-            <p>
-                Elegir el color de cabello adecuado puede resaltar tu belleza natural. Te enseñamos cómo 
-                seleccionar el tinte ideal según tu tono de piel y subtono.
-            </p>
-            <a href="articulo3.html">Leer más</a>
-        </article>
-
-        <article>
-            <h2>Tratamientos Capilares: ¿Cuál es el Mejor para tu Tipo de Cabello?</h2>
-            <p><em>Fecha: 20/01/2025</em></p>
-            <p>
-                Si tienes el cabello seco, graso o dañado, existen tratamientos específicos para cada tipo. 
-                Descubre cuál es el mejor para ti y cómo aplicarlo correctamente.
-            </p>
-            <a href="articulo4.html">Leer más</a>
-        </article>
-    </main>
+    <script>
+        // Función para mostrar/ocultar contenido completo
+        document.querySelectorAll('.toggle-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const articleFull = this.previousElementSibling;
+                articleFull.classList.toggle('show');
+                
+                // Cambiar el texto del botón
+                if (articleFull.classList.contains('show')) {
+                    this.innerHTML = 'Mostrar menos <i class="fas fa-chevron-up"></i>';
+                } else {
+                    this.innerHTML = 'Leer más <i class="fas fa-chevron-down"></i>';
+                }
+                
+                // Rotar el ícono
+                this.classList.toggle('active');
+            });
+        });
+    </script>
 </body>
 </html>
